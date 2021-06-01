@@ -26,7 +26,7 @@ public enum DownstreamAPIs {
         return argSize;
     }
 
-    public static DownstreamAPIs from(String command) {
+    public static DownstreamAPIs ofCommand(String command) {
         for (DownstreamAPIs api: DownstreamAPIs.values()) {
             if (api.command.equalsIgnoreCase(command)) {
                 return api;
