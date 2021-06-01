@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'java-library-distribution'
+}
+
+sourceCompatibility = '1.8'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+ext {
+    mockitoVersion = '3.9.0'
+}
+
+dependencies {
+    api project(':cdatm')
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: "${mockitoVersion}"
+}
+
+sourceSets {
+    test {
+        java {
+            srcDir 'src/test/java'
+            srcDir project(':cdatm').sourceSets.test.java
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.fork = true
+}

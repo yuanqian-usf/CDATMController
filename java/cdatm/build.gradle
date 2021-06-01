@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'java-library-distribution'
+    id 'jacoco'
+}
+
+sourceCompatibility = '1.8'
+mainClassName = 'com.circulardollar.cdatm.Main'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs "src/main/java"
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+    }
+}
+
+ext {
+    apacheCommonsVersion = '3.0'
+    mockitoVersion = '3.9.0'
+    apacheHttpComponentsVersion = '4.3.4'
+    gsonVersion = '2.8.7'
+}
+
+dependencies {
+    api group: 'org.apache.commons', name: 'commons-lang3', version: "${apacheCommonsVersion}"
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: "${mockitoVersion}"
+    api group: 'org.apache.httpcomponents', name: 'httpclient', version: "${apacheHttpComponentsVersion}"
+    api group: 'com.google.code.gson', name: 'gson', version: "${gsonVersion}"
+
+}
+
+
+test {
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+}
+
+jacoco {
+    applyTo run
+}
+
+tasks.register('applicationCodeCoverageReport', JacocoReport) {
+    executionData run
+    sourceSets sourceSets.main
+}
