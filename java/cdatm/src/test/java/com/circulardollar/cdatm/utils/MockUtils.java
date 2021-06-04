@@ -1,7 +1,7 @@
 package com.circulardollar.cdatm.utils;
 
-import com.circulardollar.cdatm.business.upstream.model.error.Error;
-import com.circulardollar.cdatm.business.upstream.model.error.IError;
+import com.circulardollar.cdatm.business.upstream.model.error.ErrorRecord;
+import com.circulardollar.cdatm.business.upstream.model.error.IErrorRecord;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -21,8 +21,8 @@ public class MockUtils {
         return Optional.of((int) modifiedBalance);
     }
 
-    public static IError error(MockError error) {
-        return Error.newBuilder().setErrorCode(error.getErrorCode())
+    public static IErrorRecord error(MockError error) {
+        return ErrorRecord.newBuilder().setErrorCode(error.getErrorCode())
             .setErrorMessages(Collections.singletonList(error.getErrorMessage())).build();
     }
 }

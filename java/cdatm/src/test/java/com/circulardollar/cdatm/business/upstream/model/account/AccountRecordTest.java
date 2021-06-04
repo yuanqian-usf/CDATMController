@@ -1,10 +1,11 @@
 package com.circulardollar.cdatm.business.upstream.model.account;
 
-import static com.circulardollar.cdatm.TestBase.testAccountNumber;
-import static com.circulardollar.cdatm.TestBase.testBalance;
+import static com.circulardollar.cdatm.TestBase.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.stream.IntStream;
+
 import org.junit.Test;
 
 public class AccountRecordTest {
@@ -65,4 +66,12 @@ public class AccountRecordTest {
               assertEquals(testBalance.get(index), account.getBalance());
             });
   }
+
+    @Test
+    public void testToString() {
+        assertNotNull(
+            AccountRecord.newBuilder()
+                .setAccountNumber(randomString()).setBalance(randomInt())
+                .build().toString());
+    }
 }

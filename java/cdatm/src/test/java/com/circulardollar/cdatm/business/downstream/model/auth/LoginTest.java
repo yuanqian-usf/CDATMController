@@ -4,8 +4,8 @@ import com.circulardollar.cdatm.business.downstream.model.card.Card;
 import com.circulardollar.cdatm.business.downstream.model.pin.Pin;
 import org.junit.Test;
 
+import static com.circulardollar.cdatm.TestBase.randomString;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.ArgumentMatchers.*;
 
 public class LoginTest {
 
@@ -26,29 +26,29 @@ public class LoginTest {
 
     @Test public void getCard() {
         assertNotNull(new Login(
-            Card.newBuilder().setHolderName(anyString()).setCardNumber(anyString())
-                .setCvc(anyString()).setExpirationDate(anyString()).build(),
-            Pin.newBuilder().setPinNumber(anyString()).build()).getCard());
+            Card.newBuilder().setHolderName(randomString()).setCardNumber(randomString())
+                .setCvc(randomString()).setExpirationDate(randomString()).build(),
+            Pin.newBuilder().setPinNumber(randomString()).build()).getCard());
     }
 
     @Test public void getPin() {
         assertNotNull(new Login(
-            Card.newBuilder().setHolderName(anyString()).setCardNumber(anyString())
-                .setCvc(anyString()).setExpirationDate(anyString()).build(),
-            Pin.newBuilder().setPinNumber(anyString()).build()).getPin());
+            Card.newBuilder().setHolderName(randomString()).setCardNumber(randomString())
+                .setCvc(randomString()).setExpirationDate(randomString()).build(),
+            Pin.newBuilder().setPinNumber(randomString()).build()).getPin());
     }
 
     @Test public void newBuilder() {
         assertNotNull(Login.newBuilder().setCard(
-            Card.newBuilder().setHolderName(anyString()).setCardNumber(anyString())
-                .setCvc(anyString()).setExpirationDate(anyString()).build())
-            .setPin(Pin.newBuilder().setPinNumber(anyString()).build()).build());
+            Card.newBuilder().setHolderName(randomString()).setCardNumber(randomString())
+                .setCvc(randomString()).setExpirationDate(randomString()).build())
+            .setPin(Pin.newBuilder().setPinNumber(randomString()).build()).build());
     }
 
   @Test public void testToString() {
     assertNotNull(new Login(
-        Card.newBuilder().setHolderName(anyString()).setCardNumber(anyString())
-            .setCvc(anyString()).setExpirationDate(anyString()).build(),
-        Pin.newBuilder().setPinNumber(anyString()).build()).toString());
+        Card.newBuilder().setHolderName(randomString()).setCardNumber(randomString())
+            .setCvc(randomString()).setExpirationDate(randomString()).build(),
+        Pin.newBuilder().setPinNumber(randomString()).build()).toString());
   }
 }

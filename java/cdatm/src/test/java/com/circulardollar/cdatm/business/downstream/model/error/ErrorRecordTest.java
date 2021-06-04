@@ -5,11 +5,11 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
+import static com.circulardollar.cdatm.TestBase.randomInt;
+import static com.circulardollar.cdatm.TestBase.randomList;
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyList;
 
-public class ErrorTest {
+public class ErrorRecordTest {
 
     @Test public void of() {
         String errorMessage = "0";
@@ -26,14 +26,14 @@ public class ErrorTest {
     }
 
     @Test public void getErrorCode() {
-        assertNotNull(new Error(anyInt(), anyList()).getErrorCode());
+        assertNotNull(new Error(randomInt(), randomList()).getErrorCode());
     }
 
     @Test public void getErrorMessages() {
-        assertNotNull(new Error(anyInt(), anyList()).getErrorMessages());
+        assertNotNull(new Error(randomInt(), randomList()).getErrorMessages());
     }
 
     @Test public void testToString() {
-        assertNotNull(new Error(anyInt(), anyList()).toString());
+        assertNotNull(new Error(randomInt(), randomList()).toString());
     }
 }

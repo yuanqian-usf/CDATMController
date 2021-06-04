@@ -1,12 +1,9 @@
 package com.circulardollar.cdatm.business.mapper;
 
-import static com.circulardollar.cdatm.TestBase.REPEAT_TEST_ITERATION;
-import static com.circulardollar.cdatm.TestBase.randomString;
+import static com.circulardollar.cdatm.TestBase.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
 
 import com.circulardollar.cdatm.business.downstream.model.account.Account;
 import com.circulardollar.cdatm.business.downstream.model.account.IAccount;
@@ -28,21 +25,21 @@ public class AccountMapperTest {
 
   @Test
   public void AccountMapper_up_02() {
-    String mockString = anyString();
+    String mockString = randomString();
     assertEquals(
         mockString,
         AccountMapper.up(
-                Account.newBuilder().setAccountNumber(mockString).setBalance(anyInt()).build())
+                Account.newBuilder().setAccountNumber(mockString).setBalance(randomInt()).build())
             .getAccountNumber());
   }
 
   @Test
   public void AccountMapper_up_03() {
-    int mockInt = anyInt();
+    int mockInt = randomInt();
     assertEquals(
         Optional.of(mockInt).get(),
         AccountMapper.up(
-                Account.newBuilder().setAccountNumber(anyString()).setBalance(mockInt).build())
+                Account.newBuilder().setAccountNumber(randomString()).setBalance(mockInt).build())
             .getBalance());
   }
 
@@ -53,25 +50,25 @@ public class AccountMapperTest {
 
   @Test
   public void AccountMapper_down_02() {
-    String mockString = anyString();
+    String mockString = randomString();
     assertEquals(
         mockString,
         AccountMapper.down(
                 AccountRecord.newBuilder()
                     .setAccountNumber(mockString)
-                    .setBalance(anyInt())
+                    .setBalance(randomInt())
                     .build())
             .getAccountNumber());
   }
 
   @Test
   public void AccountMapper_down_03() {
-    int mockInt = anyInt();
+    int mockInt = randomInt();
     assertEquals(
         Optional.of(mockInt).get(),
         AccountMapper.down(
                 AccountRecord.newBuilder()
-                    .setAccountNumber(anyString())
+                    .setAccountNumber(randomString())
                     .setBalance(mockInt)
                     .build())
             .getBalance());
@@ -87,7 +84,7 @@ public class AccountMapperTest {
     List<IAccount> accounts = new ArrayList<>();
     for (int i = 0; i < REPEAT_TEST_ITERATION; i++) {
       accounts.add(
-          Account.newBuilder().setAccountNumber(randomString()).setBalance(anyInt()).build());
+          Account.newBuilder().setAccountNumber(randomString()).setBalance(randomInt()).build());
     }
 
     Map<String, IAccount> actual = AccountMapper.mapAccounts(accounts);

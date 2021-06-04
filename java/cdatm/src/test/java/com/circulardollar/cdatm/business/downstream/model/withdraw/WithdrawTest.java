@@ -1,14 +1,10 @@
 package com.circulardollar.cdatm.business.downstream.model.withdraw;
 
 import com.circulardollar.cdatm.business.downstream.model.account.Account;
-import com.circulardollar.cdatm.business.downstream.model.account.IAccount;
-import com.circulardollar.cdatm.business.downstream.model.auth.Login;
 import org.junit.Test;
 
-import static com.circulardollar.cdatm.utils.TestUtils.anyString;
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static com.circulardollar.cdatm.TestBase.*;
+import static org.junit.Assert.assertNotNull;
 
 public class WithdrawTest {
 
@@ -34,44 +30,31 @@ public class WithdrawTest {
 
     @Test public void getAmount() {
         assertNotNull(new Withdraw(
-            Account.newBuilder()
-                .setAccountNumber(anyString())
-                .setBalance(anyInt())
-                .build(),
-            anyInt(), anyLong())
-            .getAmount());
+            Account.newBuilder().setAccountNumber(randomString()).setBalance(randomInt()).build(),
+            randomInt(), randomLong()).getAmount());
     }
 
     @Test public void getTimeStamp() {
         assertNotNull(new Withdraw(
-            Account.newBuilder()
-                .setAccountNumber(anyString())
-                .setBalance(anyInt())
-                .build(),
-            anyInt(), anyLong())
-            .getTimeStamp());
+            Account.newBuilder().setAccountNumber(randomString()).setBalance(randomInt()).build(),
+            randomInt(), randomLong()).getTimeStamp());
     }
 
     @Test public void getAccount() {
         assertNotNull(new Withdraw(
-            Account.newBuilder()
-                .setAccountNumber(anyString())
-                .setBalance(anyInt()).build(),
-            anyInt(), anyLong())
-            .getAccount());
+            Account.newBuilder().setAccountNumber(randomString()).setBalance(randomInt()).build(),
+            randomInt(), randomLong()).getAccount());
     }
 
     @Test public void newBuilder() {
         assertNotNull(Withdraw.newBuilder().setAccount(
-            Account.newBuilder().setAccountNumber(anyString()).setBalance(anyInt()).build()).setAmount(anyInt()).setTimeStamp(anyLong()).build());
+            Account.newBuilder().setAccountNumber(randomString()).setBalance(randomInt()).build())
+            .setAmount(randomInt()).setTimeStamp(randomLong()).build());
     }
 
     @Test public void testToString() {
         assertNotNull(new Withdraw(
-            Account.newBuilder()
-                .setAccountNumber(anyString())
-                .setBalance(anyInt()).build(),
-            anyInt(), anyLong())
-            .toString());
+            Account.newBuilder().setAccountNumber(randomString()).setBalance(randomInt()).build(),
+            randomInt(), randomLong()).toString());
     }
 }

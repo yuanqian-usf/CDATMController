@@ -5,8 +5,8 @@ import com.circulardollar.cdatm.business.upstream.model.card.CardRecord;
 import com.circulardollar.cdatm.business.upstream.model.pin.PinRecord;
 import org.junit.Test;
 
+import static com.circulardollar.cdatm.TestBase.randomString;
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.anyString;
 
 public class LoginMapperTest {
 
@@ -15,7 +15,7 @@ public class LoginMapperTest {
     }
 
     @Test public void LoginMapper_down_02() {
-        String mockString = anyString();
+        String mockString = randomString();
         CardRecord mockCard = CardRecord.newBuilder().setHolderName(mockString).setExpirationDate(mockString).setCvc(mockString).setCardNumber(mockString).build();
         assertEquals(
             mockCard.getCardNumber(),
@@ -47,7 +47,7 @@ public class LoginMapperTest {
     }
 
     @Test public void LoginMapper_down_03() {
-        String mockString = anyString();
+        String mockString = randomString();
         CardRecord mockCard = CardRecord.newBuilder().setHolderName(mockString).setExpirationDate(mockString).setCvc(mockString).setCardNumber(mockString).build();
         PinRecord pinCard = PinRecord.newBuilder().setPinNumber(mockString).build();
         assertEquals(
