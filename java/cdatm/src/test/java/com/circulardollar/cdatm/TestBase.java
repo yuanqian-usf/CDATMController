@@ -2,10 +2,12 @@ package com.circulardollar.cdatm;
 
 import com.circulardollar.cdatm.business.downstream.model.error.Error;
 import com.circulardollar.cdatm.business.downstream.model.error.IError;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import com.circulardollar.cdatm.config.ATMConfigurations;
+import com.circulardollar.cdatm.config.IATMConfigurations;
+
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class TestBase {
 
@@ -14,6 +16,50 @@ public class TestBase {
   public static String randomString() {
     return UUID.randomUUID().toString();
   }
+
+  public static int randomInt() {
+    return new Random().nextInt(100);
+  }
+
+  public static long randomLong() {
+    return new Random().nextLong();
+  }
+
+  public static <T> List<T> randomList() {
+    return new ArrayList<>();
+  }
+
+  public static <K, V> Map<K, V> randomMap() {
+    return new HashMap<>();
+  }
+
+  public static Integer randomNumber(int end) {
+    return new Random().nextInt(end);
+  }
+
+  public static Integer randomDigit() {
+    return new Random().nextInt(10);
+  }
+
+  public static String randomCardNumber(int minLen, int maxLen) {
+    return randomLengthRandomNumber(minLen, maxLen);
+  }
+
+  public static String randomValidCardNumber() {
+    return randomLengthRandomNumber(IATMConfigurations.MIN_CARD_NUMBER_LENGTH, IATMConfigurations.MAX_CARD_NUMBER_LENGTH);
+  }
+
+  public static String randomValidPinNumber() {
+    return randomLengthRandomNumber(IATMConfigurations.MIN_PIN_LENGTH, IATMConfigurations.MAX_PIN_LENGTH);
+  }
+
+
+  public static String randomLengthRandomNumber(int min, int max) {
+    return IntStream.range(0, randomNumber(max - min) + min)
+        .mapToObj(index -> randomDigit().toString())
+        .collect(Collectors.joining());
+  }
+
 
   public static List<String> testAccountNumber = Arrays.asList("", "0", "a");
   public static List<Integer> testResponseBody = Arrays.asList(0, 1, 2);

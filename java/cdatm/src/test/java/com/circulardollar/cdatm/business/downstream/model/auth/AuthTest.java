@@ -2,8 +2,8 @@ package com.circulardollar.cdatm.business.downstream.model.auth;
 
 import org.junit.Test;
 
+import static com.circulardollar.cdatm.TestBase.*;
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.*;
 
 public class AuthTest {
     @Test(expected = NullPointerException.class)
@@ -30,26 +30,26 @@ public class AuthTest {
     @Test public void newBuilder() {
         assertNotNull(
             Auth.newBuilder()
-                .setTokenId(anyString())
-                .setTimeStamp(anyLong())
-                .setAccounts(anyList())
+                .setTokenId(randomString())
+                .setTimeStamp(randomLong())
+                .setAccounts(randomList())
                 .build()
         );
     }
 
     @Test public void getTokenId() {
-        assertNotNull(new Auth(anyString(), anyList(), anyLong()).getTokenId());
+        assertNotNull(new Auth(randomString(), randomList(), randomLong()).getTokenId());
     }
 
     @Test public void getAccounts() {
-        assertNotNull(new Auth(anyString(), anyList(), anyLong()).getAccounts());
+        assertNotNull(new Auth(randomString(), randomList(), randomLong()).getAccounts());
     }
 
     @Test public void getTimeStamp() {
-        assertNotNull(new Auth(anyString(), anyList(), anyLong()).getTimeStamp());
+        assertNotNull(new Auth(randomString(), randomList(), randomLong()).getTimeStamp());
     }
 
     @Test public void testToString() {
-        assertNotNull(new Auth(anyString(), anyList(), anyLong()).toString());
+        assertNotNull(new Auth(randomString(), randomList(), randomLong()).toString());
     }
 }

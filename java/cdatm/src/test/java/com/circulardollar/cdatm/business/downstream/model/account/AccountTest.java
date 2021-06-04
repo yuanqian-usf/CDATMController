@@ -1,8 +1,8 @@
 package com.circulardollar.cdatm.business.downstream.model.account;
 
+import static com.circulardollar.cdatm.TestBase.randomInt;
+import static com.circulardollar.cdatm.TestBase.randomString;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
 
 import org.junit.Test;
 
@@ -25,16 +25,16 @@ public class AccountTest {
 
   @Test
   public void getAccountNumber() {
-    assertNotNull(new Account(anyString(), anyInt()).getAccountNumber());
+    assertNotNull(new Account(randomString(), randomInt()).getAccountNumber());
   }
 
   @Test
   public void getBalance() {
-    assertNotNull(new Account(anyString(), anyInt()).getBalance());
+    assertNotNull(new Account(randomString(), randomInt()).getBalance());
   }
 
   @Test
   public void newBuilder() {
-    assertNotNull(Account.newBuilder().setAccountNumber(anyString()).setBalance(anyInt()).build());
+    assertNotNull(Account.newBuilder().setAccountNumber(randomString()).setBalance(randomInt()).build());
   }
 }

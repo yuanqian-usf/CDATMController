@@ -3,22 +3,66 @@ package com.circulardollar.cdatm.business.upstream.model.auth;
 import com.google.gson.Gson;
 import org.junit.Test;
 
+import static com.circulardollar.cdatm.TestBase.*;
 import static org.junit.Assert.*;
 
 public class AuthRecordTest {
 
+    @Test(expected = NullPointerException.class)
+    public void AuthRecord_not_null_whenExceptionThrown_thenExpectationSatisfied() {
+        AuthRecord.newBuilder().build();
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void setAccounts_not_null_whenExceptionThrown_thenExpectationSatisfied() {
+        AuthRecord.newBuilder().setAccounts(null).build();
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void setTimeStamp_not_null_whenExceptionThrown_thenExpectationSatisfied() {
+        AuthRecord.newBuilder().setTimeStamp(null).build();
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void setTokenId_not_null_whenExceptionThrown_thenExpectationSatisfied() {
+        AuthRecord.newBuilder().setTokenId(null).build();
+    }
+
+
     @Test public void newBuilder() {
+        assertNotNull(
+            AuthRecord.newBuilder()
+                .setTokenId(randomString())
+                .setTimeStamp(randomLong())
+                .setAccounts(randomList())
+                .build()
+        );
     }
 
     @Test public void getTokenId() {
-        String a = "";
+        assertNotNull(AuthRecord.newBuilder()
+            .setTokenId(randomString())
+            .setTimeStamp(randomLong())
+            .setAccounts(randomList())
+            .build().getTokenId());
     }
 
     @Test public void getAccounts() {
+        assertNotNull(AuthRecord.newBuilder()
+            .setTokenId(randomString())
+            .setTimeStamp(randomLong())
+            .setAccounts(randomList())
+            .build().getAccounts());
     }
 
     @Test public void getTimeStamp() {
+        assertNotNull(AuthRecord.newBuilder()
+            .setTokenId(randomString())
+            .setTimeStamp(randomLong())
+            .setAccounts(randomList())
+            .build().getTimeStamp());
     }
+
 
     @Test public void testGson_on_success() {
         Gson gson = new Gson();
@@ -40,6 +84,15 @@ public class AuthRecordTest {
 
         assertNotNull(response);
 
+    }
+
+    @Test
+    public void testToString() {
+        assertNotNull(AuthRecord.newBuilder()
+            .setTokenId(randomString())
+            .setTimeStamp(randomLong())
+            .setAccounts(randomList())
+            .build().toString());
     }
 
 }

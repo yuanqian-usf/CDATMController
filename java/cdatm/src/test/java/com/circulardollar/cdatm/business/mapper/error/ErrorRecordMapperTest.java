@@ -1,23 +1,25 @@
 package com.circulardollar.cdatm.business.mapper.error;
 
+import com.circulardollar.cdatm.business.downstream.model.error.IError;
 import org.junit.Test;
 
 import java.util.List;
 
-import com.circulardollar.cdatm.business.upstream.model.error.IError;
-import com.circulardollar.cdatm.business.upstream.model.error.Error;
+import com.circulardollar.cdatm.business.upstream.model.error.IErrorRecord;
+import com.circulardollar.cdatm.business.upstream.model.error.ErrorRecord;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyList;
 
-public class ErrorMapperTest {
+public class ErrorRecordMapperTest {
 
     @Test public void ErrorMapper_down_01() {
-        assertNull(ErrorMapper.down(null));
+        IError error = ErrorMapper.down(null);
+        assertNull(error);
     }
 
     @Test public void ErrorMapper_down_02() {
         List<String> mockList = anyList();
-        IError error = Error.of(Object.class, mockList);
+        IErrorRecord error = ErrorRecord.of(Object.class, mockList);
         assertNotNull(ErrorMapper.down(error));
         assertNotNull(error.getErrorCode());
         assertNotNull(error.getErrorMessages());

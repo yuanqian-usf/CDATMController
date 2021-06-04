@@ -1,7 +1,7 @@
 package com.circulardollar.cdatm.business.downstream.model.card;
 
+import static com.circulardollar.cdatm.TestBase.randomString;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.ArgumentMatchers.anyString;
 
 import org.junit.Test;
 
@@ -34,31 +34,31 @@ public class CardTest {
 
   @Test
   public void getHolderName() {
-    assertNotNull(new Card(anyString(), anyString(), anyString(), anyString()).getHolderName());
+    assertNotNull(new Card(randomString(), randomString(), randomString(), randomString()).getHolderName());
   }
 
   @Test
   public void getCardNumber() {
-    assertNotNull(new Card(anyString(), anyString(), anyString(), anyString()).getCardNumber());
+    assertNotNull(new Card(randomString(), randomString(), randomString(), randomString()).getCardNumber());
   }
 
   @Test
   public void getCVC() {
-    assertNotNull(new Card(anyString(), anyString(), anyString(), anyString()).getCVC());
+    assertNotNull(new Card(randomString(), randomString(), randomString(), randomString()).getCVC());
   }
 
   @Test
   public void getExpirationDate() {
-    assertNotNull(new Card(anyString(), anyString(), anyString(), anyString()).getExpirationDate());
+    assertNotNull(new Card(randomString(), randomString(), randomString(), randomString()).getExpirationDate());
   }
 
   @Test
   public void newBuilder() {
     assertNotNull(Card.newBuilder()
-        .setHolderName(anyString())
-        .setCardNumber(anyString())
-        .setCvc(anyString())
-        .setExpirationDate(anyString())
+        .setHolderName(randomString())
+        .setCardNumber(randomString())
+        .setCvc(randomString())
+        .setExpirationDate(randomString())
         .build());
   }
 }

@@ -1,7 +1,7 @@
 package com.circulardollar.cdatm.business.downstream.model.pin;
 
+import static com.circulardollar.cdatm.TestBase.randomString;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.ArgumentMatchers.anyString;
 
 import org.junit.Test;
 
@@ -19,11 +19,11 @@ public class PinTest {
 
   @Test
   public void getPinNumber() {
-    assertNotNull(new Pin(anyString()).getPinNumber());
+    assertNotNull(new Pin(randomString()).getPinNumber());
   }
 
   @Test
   public void newBuilder() {
-    assertNotNull(Pin.newBuilder().setPinNumber(anyString()).build());
+    assertNotNull(Pin.newBuilder().setPinNumber(randomString()).build());
   }
 }
