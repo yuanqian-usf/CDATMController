@@ -9,7 +9,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import com.circulardollar.cdatm.IATMController;
-import com.circulardollar.cdatm.Main;
+import com.circulardollar.cdatm.__Main;
 import com.circulardollar.cdatm.business.downstream.model.auth.ILogin;
 import com.circulardollar.cdatm.business.upstream.model.account.IAccountRecord;
 import com.circulardollar.cdatm.business.upstream.model.accounts.IAccountsRecord;
@@ -37,7 +37,7 @@ public class __InsertCard_VerifyPin_SelectAccount_EjectCard {
   @Test
   public void test_insertCard_verifyPin_selectAccount_ejectCard_shouldNotExpectError() {
     IATMController controller =
-        Main.createATMController(
+        __Main.createATMController(
             NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
@@ -49,7 +49,7 @@ public class __InsertCard_VerifyPin_SelectAccount_EjectCard {
   @Test
   public void test_insertCard_verifyPin_selectAccount_repeat_ejectCard_shouldExpectError() {
     IATMController controller =
-        Main.createATMController(
+        __Main.createATMController(
             NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
@@ -62,7 +62,7 @@ public class __InsertCard_VerifyPin_SelectAccount_EjectCard {
   @Test
   public void test_insertCard_verifyPin_selectAccount_ejectCard_repeat_shouldNotExpectError() {
     IATMController controller =
-        Main.createATMController(
+        __Main.createATMController(
             NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     for (int i = 0; i < REPEAT_TEST_ITERATION; i++) {
       ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());

@@ -18,15 +18,11 @@ import com.circulardollar.cdatm.business.upstream.model.auth.LoginRecord;
 import com.circulardollar.cdatm.business.upstream.model.card.ICardRecord;
 import com.circulardollar.cdatm.business.upstream.model.pin.IPinRecord;
 import com.circulardollar.cdatm.config.IATMConfigurations;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -74,10 +70,6 @@ public class __TestBase {
         .collect(Collectors.joining());
   }
 
-  public static Integer anyInteger() {
-    return 0;
-  }
-
   public static Integer randomDigit() {
     return random().nextInt(10);
   }
@@ -123,6 +115,12 @@ public class __TestBase {
 
   public static IPinRecord validRandomPinRecord() {
     return PinMapper.up(validRandomPin());
+  }
+
+  public static Map<ILoginRecord, IAccountsRecord> dummyDB() {
+    Map<ILoginRecord, IAccountsRecord> dummyAccountsTable = new HashMap<>();
+    __TestBase.generateBankDB(dummyAccountsTable, new HashMap<>(), new HashMap<>());
+    return dummyAccountsTable;
   }
 
   public static void generateBankDB(

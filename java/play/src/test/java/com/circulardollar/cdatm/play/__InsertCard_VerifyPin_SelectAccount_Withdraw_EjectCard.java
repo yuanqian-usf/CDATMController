@@ -11,7 +11,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import com.circulardollar.cdatm.IATMController;
-import com.circulardollar.cdatm.Main;
+import com.circulardollar.cdatm.__Main;
 import com.circulardollar.cdatm.business.downstream.model.auth.ILogin;
 import com.circulardollar.cdatm.business.downstream.model.auth.Login;
 import com.circulardollar.cdatm.business.downstream.model.error.IError;
@@ -51,7 +51,7 @@ public class __InsertCard_VerifyPin_SelectAccount_Withdraw_EjectCard {
     IATMController controller;
     do {
       controller =
-          Main.createATMController(
+          __Main.createATMController(
               NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
       cardNumberAccountNumberPair =
           randomCardNumberWithValidWithdrawBalance(
@@ -97,7 +97,7 @@ public class __InsertCard_VerifyPin_SelectAccount_Withdraw_EjectCard {
     IATMController controller;
     do {
       controller =
-          Main.createATMController(
+          __Main.createATMController(
               NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
       cardNumberAccountNumberPair =
           randomCardNumberWithValidWithdrawBalance(
@@ -145,7 +145,7 @@ public class __InsertCard_VerifyPin_SelectAccount_Withdraw_EjectCard {
     IATMController controller;
     do {
       controller =
-          Main.createATMController(
+          __Main.createATMController(
               NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
       cardNumberAccountNumberPair =
           randomCardNumberWithValidWithdrawBalance(

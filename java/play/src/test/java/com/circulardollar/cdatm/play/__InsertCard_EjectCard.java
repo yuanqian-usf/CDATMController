@@ -6,20 +6,20 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import com.circulardollar.cdatm.IATMController;
-import com.circulardollar.cdatm.Main;
+import com.circulardollar.cdatm.__Main;
 import org.junit.Test;
 
 public class __InsertCard_EjectCard {
 
   @Test
   public void test_ejectCard_only_shouldExpectError() {
-    IATMController controller = Main.nonCSATMController();
+    IATMController controller = __Main.nonCSATMController();
     assertNotNull(controller.ejectCard().getError());
   }
 
   @Test
   public void test_insertCard_ejectCard_shouldNotExpectError() {
-    IATMController controller = Main.nonCSATMController();
+    IATMController controller = __Main.nonCSATMController();
     assertNull(controller.insertCard(validRandomCard()).getError());
     assertNull(controller.ejectCard().getError());
   }
@@ -27,7 +27,7 @@ public class __InsertCard_EjectCard {
 
   @Test
   public void test_insertCard_ejectCard_repeat_shouldNotExpectError_01() {
-    IATMController controller = Main.nonCSATMController();
+    IATMController controller = __Main.nonCSATMController();
     assertNull(controller.insertCard(validRandomCard()).getError());
     assertNull(controller.ejectCard().getError());
     assertNull(controller.insertCard(validRandomCard()).getError());
@@ -35,7 +35,7 @@ public class __InsertCard_EjectCard {
 
   @Test
   public void test_insertCard_ejectCard_repeat_shouldNotExpectError_02() {
-    IATMController controller = Main.nonCSATMController();
+    IATMController controller = __Main.nonCSATMController();
     for (int i = 0; i < REPEAT_TEST_ITERATION; i++) {
       assertNull(controller.insertCard(validRandomCard()).getError());
       assertNull(controller.ejectCard().getError());

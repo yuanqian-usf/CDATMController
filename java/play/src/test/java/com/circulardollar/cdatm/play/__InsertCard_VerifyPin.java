@@ -14,7 +14,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import com.circulardollar.cdatm.IATMController;
-import com.circulardollar.cdatm.Main;
+import com.circulardollar.cdatm.__Main;
+import com.circulardollar.cdatm.__Main;
 import com.circulardollar.cdatm.business.downstream.model.auth.ILogin;
 import com.circulardollar.cdatm.business.downstream.model.error.IError;
 import com.circulardollar.cdatm.business.downstream.model.pin.Pin;
@@ -48,20 +49,20 @@ public class __InsertCard_VerifyPin {
 
   @Test
   public void test_verifyPin_only_shouldExpectError() {
-    IATMController controller = Main.nonCSATMController();
+    IATMController controller = __Main.nonCSATMController();
     assertNotNull(controller.verifyPin(validRandomPin()).getError());
   }
 
   @Test
   public void test_insertCard_verifyPin_pinNumber_response_null() {
-    IATMController controller = Main.nonCSATMController();
+    IATMController controller = __Main.nonCSATMController();
     controller.insertCard(validRandomCard());
     assertNotNull(controller.verifyPin(null));
   }
 
   @Test
   public void test_insertCard_verifyPin_response_not_null() {
-    IATMController controller = Main.nonCSATMController();
+    IATMController controller = __Main.nonCSATMController();
     controller.insertCard(validRandomCard());
     assertNotNull(
         controller.verifyPin(pendingPinNumberPinBuilder.setPinNumber(anyString()).build()));
@@ -69,7 +70,7 @@ public class __InsertCard_VerifyPin {
 
   @Test
   public void test_insertCard_verifyPin_shouldExpectError() {
-    IATMController controller = Main.nonCSATMController();
+    IATMController controller = __Main.nonCSATMController();
     controller.insertCard(validRandomCard());
     assertNotNull(
         controller
@@ -79,7 +80,7 @@ public class __InsertCard_VerifyPin {
 
   @Test
   public void test_insertCard_verifyPin_validate_pinNumber_zeroLength_shouldExpectError() {
-    IATMController controller = Main.nonCSATMController();
+    IATMController controller = __Main.nonCSATMController();
     controller.insertCard(validRandomCard());
     assertNotNull(
         controller
@@ -91,7 +92,7 @@ public class __InsertCard_VerifyPin {
   public void
       test_insertCard_verifyPin_validate_pinNumber_invalidLength_shouldExpectError_BELOW_MIN() {
     for (int i = 0; i < RANDOM_TEST_ITERATION; i++) {
-      IATMController controller = Main.nonCSATMController();
+      IATMController controller = __Main.nonCSATMController();
       controller.insertCard(validRandomCard());
       IError error =
           controller
@@ -111,7 +112,7 @@ public class __InsertCard_VerifyPin {
   public void
       test_insertCard_verifyPin_validate_pinNumber_invalidLength_shouldExpectError_ABOVE_MAX() {
     for (int i = 0; i < RANDOM_TEST_ITERATION; i++) {
-      IATMController controller = Main.nonCSATMController();
+      IATMController controller = __Main.nonCSATMController();
       controller.insertCard(validRandomCard());
       IError error =
           controller
@@ -127,7 +128,7 @@ public class __InsertCard_VerifyPin {
   @Test
   public void test_insertCard_verifyPin_pinNumber_validRandomLength_verifyPin_shouldExpectTrue() {
     for (int i = 0; i < RANDOM_TEST_ITERATION; i++) {
-      IATMController controller = Main.nonCSATMController();
+      IATMController controller = __Main.nonCSATMController();
       controller.insertCard(validRandomCard());
 
       IResponse<List<String>, IError> actual =
@@ -144,7 +145,7 @@ public class __InsertCard_VerifyPin {
   @Test
   public void test_insertCard_verifyPin_repeat_shouldExpectError_01() {
     IATMController controller =
-        Main.createATMController(
+        __Main.createATMController(
             NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
@@ -155,7 +156,7 @@ public class __InsertCard_VerifyPin {
   @Test
   public void test_insertCard_verifyPin_first_time_failed_shouldNotExpectError() {
     IATMController controller =
-        Main.createATMController(
+        __Main.createATMController(
             NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
@@ -168,7 +169,7 @@ public class __InsertCard_VerifyPin {
 
   @Test
   public void test_insertCard_verifyPin_repeat_invalid_pin_validation_shouldExpectError() {
-    IATMController controller = Main.nonCSATMController();
+    IATMController controller = __Main.nonCSATMController();
     assertNull(controller.insertCard(validRandomCard()).getError());
     for (int i = 0; i < REPEAT_TEST_ITERATION; i++) {
       assertNotNull(
