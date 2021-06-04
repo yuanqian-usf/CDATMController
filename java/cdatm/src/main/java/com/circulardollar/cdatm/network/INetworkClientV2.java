@@ -16,7 +16,7 @@ public interface INetworkClientV2 extends INetworkClient {
   abstract class IBuilder {
     public IBuilder setAccountsRecordTable(Map<ILoginRecord, IAccountsRecord> accountsRecordTable) {return null;}
 
-      public IBuilder setUrl(String url) {return null; }
+    public IBuilder setUrl(String url) {return null; }
 
     public abstract INetworkClientV2 build();
   }
