@@ -6,8 +6,15 @@ import org.junit.Test;
 
 public class __TestMain {
 
+
+
   @Test
   public void test_insertCard_null_response_not_null() {
-    assertNotNull(Main.nonCSATMController().insertCard(null));
+    assertNotNull(__Main.nonCSATMController().insertCard(null));
+  }
+
+  @Test
+  public void testDummy() {
+    assertNotNull(__Main.nonCSATMController());
   }
 }

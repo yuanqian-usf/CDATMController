@@ -12,7 +12,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import com.circulardollar.cdatm.IATMController;
-import com.circulardollar.cdatm.Main;
+import com.circulardollar.cdatm.__Main;
 import com.circulardollar.cdatm.business.downstream.model.auth.ILogin;
 import com.circulardollar.cdatm.business.downstream.model.auth.Login;
 import com.circulardollar.cdatm.business.downstream.model.error.IError;
@@ -49,7 +49,7 @@ public class __InsertCard_VerifyPin_SelectAccount_Withdraw {
   @Test
   public void test_withdraw_only_shouldExpectError() {
     IATMController controller =
-        Main.createATMController(
+        __Main.createATMController(
             NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     assertNotNull(controller.withdraw(1).getError());
   }
@@ -57,7 +57,7 @@ public class __InsertCard_VerifyPin_SelectAccount_Withdraw {
   @Test
   public void test_insertCard_withdraw_shouldExpectError() {
     IATMController controller =
-        Main.createATMController(
+        __Main.createATMController(
             NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
@@ -67,7 +67,7 @@ public class __InsertCard_VerifyPin_SelectAccount_Withdraw {
   @Test
   public void test_insertCard_verifyPin_withdraw_shouldExpectError() {
     IATMController controller =
-        Main.createATMController(
+        __Main.createATMController(
             NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
@@ -82,7 +82,7 @@ public class __InsertCard_VerifyPin_SelectAccount_Withdraw {
     IATMController controller;
     do {
       controller =
-          Main.createATMController(
+          __Main.createATMController(
               NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
       cardNumberAccountNumberPair =
           randomCardNumberWithValidWithdrawBalance(
@@ -127,7 +127,7 @@ public class __InsertCard_VerifyPin_SelectAccount_Withdraw {
     IATMController controller;
     do {
       controller =
-          Main.createATMController(
+          __Main.createATMController(
               NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
       cardNumberAccountNumberPair =
           randomCardNumberWithValidWithdrawBalance(
@@ -166,7 +166,7 @@ public class __InsertCard_VerifyPin_SelectAccount_Withdraw {
     IATMController controller;
     do {
       controller =
-          Main.createATMController(
+          __Main.createATMController(
               NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
       cardNumberAccountNumberPair =
           randomCardNumberWithValidWithdrawBalance(

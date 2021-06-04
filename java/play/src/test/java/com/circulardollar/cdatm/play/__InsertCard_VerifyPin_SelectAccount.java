@@ -13,7 +13,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import com.circulardollar.cdatm.IATMController;
-import com.circulardollar.cdatm.Main;
+import com.circulardollar.cdatm.__Main;
 import com.circulardollar.cdatm.business.downstream.model.auth.ILogin;
 import com.circulardollar.cdatm.business.downstream.model.error.IError;
 import com.circulardollar.cdatm.business.downstream.response.IResponse;
@@ -46,7 +46,7 @@ public class __InsertCard_VerifyPin_SelectAccount {
   @Test
   public void test_selectAccount_only_shouldExpectError() {
     IATMController controller =
-        Main.createATMController(
+        __Main.createATMController(
             NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     assertNotNull(
         controller
@@ -59,7 +59,7 @@ public class __InsertCard_VerifyPin_SelectAccount {
   @Test
   public void test_insertCard_verifyPin_selectAccount_shouldNotExpectError() {
     IATMController controller =
-        Main.createATMController(
+        __Main.createATMController(
             NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
@@ -87,7 +87,7 @@ public class __InsertCard_VerifyPin_SelectAccount {
   @Test
   public void test_insertCard_verifyPin_selectAccount_invalid_accountNumber_shouldExpectError_01() {
     IATMController controller =
-        Main.createATMController(
+        __Main.createATMController(
             NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
@@ -100,7 +100,7 @@ public class __InsertCard_VerifyPin_SelectAccount {
   @Test
   public void test_insertCard_verifyPin_selectAccount_invalid_accountNumber_shouldExpectError_02() {
     IATMController controller =
-        Main.createATMController(
+        __Main.createATMController(
             NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
@@ -114,7 +114,7 @@ public class __InsertCard_VerifyPin_SelectAccount {
   public void
       test_insertCard_verifyPin_selectAccount_invalid_then_valid_accountNumber_shouldExpectError() {
     IATMController controller =
-        Main.createATMController(
+        __Main.createATMController(
             NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
@@ -132,7 +132,7 @@ public class __InsertCard_VerifyPin_SelectAccount {
   public void
       test_insertCard_verifyPin_selectAccount_valid_then_invalid_accountNumber_shouldExpectError() {
     IATMController controller =
-        Main.createATMController(
+        __Main.createATMController(
             NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
@@ -149,7 +149,7 @@ public class __InsertCard_VerifyPin_SelectAccount {
   @Test
   public void test_insertCard_verifyPin_repeat_selectAccount_shouldNotExpectError() {
     IATMController controller =
-        Main.createATMController(
+        __Main.createATMController(
             NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
