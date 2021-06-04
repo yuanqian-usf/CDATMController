@@ -48,8 +48,8 @@ public class AuthRecord implements IAuthRecord {
   }
 
   @Override public String toString() {
-    return "AuthRecord{" + "tokenId='" + tokenId + '\'' + ", accounts=" + accounts + ", timeStamp="
-        + timeStamp + '}';
+    return "AuthRecord{\n" + "tokenId='" + tokenId + '\'' + ", accounts=" + accounts + ", timeStamp="
+        + timeStamp + "}\n";
   }
 
   public static class Builder {

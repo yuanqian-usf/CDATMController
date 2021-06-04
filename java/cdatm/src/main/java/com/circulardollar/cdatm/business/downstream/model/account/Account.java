@@ -29,7 +29,7 @@ public class Account implements IAccount {
   }
 
   @Override public String toString() {
-    return "Account{" + "accountNumber='" + accountNumber + '\'' + ", balance=" + balance + '}';
+    return "Account{\n" + "accountNumber='" + accountNumber + '\'' + ", balance=" + balance + "}\n";
   }
 
   public static class Builder {

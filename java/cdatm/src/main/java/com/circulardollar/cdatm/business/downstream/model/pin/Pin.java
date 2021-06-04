@@ -21,7 +21,7 @@ public class Pin implements IPin {
   }
 
   @Override public String toString() {
-    return "Pin{" + "pinNumber='" + pinNumber + '\'' + '}';
+    return "Pin{\n" + "pinNumber='" + pinNumber + '\'' + "}\n";
   }
 
   public static class Builder {

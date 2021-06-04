@@ -44,8 +44,8 @@ public class DepositRecord implements IDepositRecord {
     }
 
     @Override public String toString() {
-        return "DepositRecord{" + "account=" + account + ", amount=" + amount + ", timeStamp="
-            + timeStamp + '}';
+        return "DepositRecord{\n" + "account=" + account + ", amount=" + amount + ", timeStamp="
+            + timeStamp + "}\n";
     }
 
     public static class Builder implements IDepositRecord.IBuilder<AccountRecord> {

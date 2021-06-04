@@ -6,7 +6,7 @@ public class LogoutRecord implements ILogoutRecord {
   private final Long timeStamp;
 
   @Override public String toString() {
-    return "LogoutRecord{" + "timeStamp=" + timeStamp + '}';
+    return "LogoutRecord{\n" + "timeStamp=" + timeStamp + "}\n";
   }
 
   LogoutRecord(Long timeStamp) {
@@ -38,7 +38,7 @@ public class LogoutRecord implements ILogoutRecord {
       return new LogoutRecord(timeStamp);
     }
 
-    protected Long getTimeStamp() {
+    public Long getTimeStamp() {
       return timeStamp;
     }
   }

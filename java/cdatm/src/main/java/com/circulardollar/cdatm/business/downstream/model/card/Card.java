@@ -45,8 +45,8 @@ public class Card implements ICard {
   }
 
   @Override public String toString() {
-    return "Card{" + "holderName='" + holderName + '\'' + ", cardNumber='" + cardNumber + '\''
-        + ", cvc='" + cvc + '\'' + ", expirationDate='" + expirationDate + '\'' + '}';
+    return "Card{\n" + "holderName='" + holderName + '\'' + ", cardNumber='" + cardNumber + '\''
+        + ", cvc='" + cvc + '\'' + ", expirationDate='" + expirationDate + '\'' + "}\n";
   }
 
   public static class Builder {

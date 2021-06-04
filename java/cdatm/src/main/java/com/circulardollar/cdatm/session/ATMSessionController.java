@@ -10,8 +10,6 @@ public class ATMSessionController implements IATMSessionController {
   private Map<String, IAccount> accountsMap;
   private String selectedAccountNumber;
 
-  public ATMSessionController() {}
-
   @Override
   public void setCard(ICard card) {
     this.card = card;
@@ -50,6 +48,10 @@ public class ATMSessionController implements IATMSessionController {
 
   @Override
   public IAccount getSelectedAccount() {
+    if (accountsMap == null || selectedAccountNumber == null ||
+        !accountsMap.containsKey(selectedAccountNumber)) {
+      return null;
+    }
     return accountsMap.get(selectedAccountNumber);
   }
 

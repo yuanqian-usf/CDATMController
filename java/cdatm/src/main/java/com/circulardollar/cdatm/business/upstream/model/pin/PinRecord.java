@@ -24,7 +24,7 @@ public class PinRecord implements IPinRecord {
   }
 
   @Override public String toString() {
-    return "PinRecord{" + "pinNumber='" + pinNumber + '\'' + '}';
+    return "PinRecord{\n" + "pinNumber='" + pinNumber + '\'' + "}\n";
   }
 
   public static class Builder {

@@ -1,10 +1,14 @@
 package com.circulardollar.cdatm.business.upstream.model.deposit;
 
 import com.circulardollar.cdatm.business.upstream.model.account.AccountRecord;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
 public class DepositRecordRequest extends DepositRecord implements IDepositRecordRequest {
+  @SerializedName("account")
+  @Expose
   private final String tokenId;
 
   DepositRecordRequest(
@@ -24,8 +28,8 @@ public class DepositRecordRequest extends DepositRecord implements IDepositRecor
   }
 
   @Override public String toString() {
-    return "DepositRecordRequest{" + "tokenId='" + tokenId + '\'' + ", account=" + account
-        + ", amount=" + amount + ", timeStamp=" + timeStamp + '}';
+    return "DepositRecordRequest{\n" + "tokenId='" + tokenId + '\'' + ", account=" + account
+        + ", amount=" + amount + ", timeStamp=" + timeStamp + "}\n";
   }
 
 

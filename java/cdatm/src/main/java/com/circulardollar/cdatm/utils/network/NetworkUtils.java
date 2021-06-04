@@ -27,12 +27,10 @@ import com.circulardollar.cdatm.constant.UserInterface;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
-
-import static com.circulardollar.cdatm.utils.TestUtils.TESTING;
-import static com.circulardollar.cdatm.utils.TestUtils.dummyDB;
 
 public class NetworkUtils {
     public static final String LOCAL_HOST = "localhost";
@@ -94,11 +92,7 @@ public class NetworkUtils {
         Set<DownstreamCommands> supportedCommands) throws IllegalArgumentException {
         INetworkClientV2.IBuilder networkClientBuilder = null;
         if (args == null) throw new IllegalArgumentException(Errors.INVALID_COMMAND.getValue());
-        if (args.length == 1) {
-            if (TESTING.equalsIgnoreCase(args[0])) {
-                networkClientBuilder = NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(dummyDB());
-            }
-        } else if (args.length > 1) {
+        if (args.length > 1) {
             if (!supportedCommands.contains(DownstreamCommands.ofValue(args[0]))) {
                 throw new IllegalArgumentException(Errors.UNSUPPORTED_COMMAND.getValue());
             }

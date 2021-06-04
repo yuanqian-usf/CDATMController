@@ -8,7 +8,7 @@ import com.circulardollar.cdatm.business.upstream.model.auth.*;
 import com.circulardollar.cdatm.business.upstream.model.deposit.DepositRecord;
 import com.circulardollar.cdatm.business.upstream.model.deposit.IDepositRecord;
 import com.circulardollar.cdatm.business.upstream.model.deposit.IDepositRecordRequest;
-import com.circulardollar.cdatm.business.upstream.model.error.Error;
+import com.circulardollar.cdatm.business.upstream.model.error.ErrorRecord;
 import com.circulardollar.cdatm.business.upstream.model.pin.IPinRecord;
 import com.circulardollar.cdatm.business.upstream.model.withdraw.IWithdrawRecord;
 import com.circulardollar.cdatm.business.upstream.model.withdraw.IWithdrawRecordRequest;
@@ -55,17 +55,17 @@ public class NonCSNetworkClientV2 implements INetworkClientV2 {
         RemoteResponse.Builder<IAuthRecord> builder = RemoteResponse.newBuilder();
         if (loginRequest == null || loginRequest.getBody() == null
             || loginRequest.getBody().getCard() == null || loginRequest.getBody().getPin() == null)
-            return CompletableFuture.completedFuture(builder.setError(Error.of(INetworkClientV2.class,
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord.of(INetworkClientV2.class,
                 Collections.singletonList(Errors.ILLEGAL_PARAMETER_EXCEPTION.getValue()))).build());
         if (!cardNumberLoginRecordTable
             .containsKey(loginRequest.getBody().getCard().getCardNumber())) {
-            return CompletableFuture.completedFuture(builder.setError(Error.of(INetworkClientV2.class,
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord.of(INetworkClientV2.class,
                 Collections.singletonList(Errors.INVALID_CARD_OR_PIN.getValue()))).build());
         }
         String cardNumber = loginRequest.getBody().getCard().getCardNumber();
         if (cardNumberLoginRecordTable.containsKey(cardNumber) && !loginRequest.getBody().getPin()
             .getPinNumber().equals(cardNumberLoginRecordTable.get(cardNumber).getPinNumber())) {
-            return CompletableFuture.completedFuture(builder.setError(Error.of(INetworkClientV2.class,
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord.of(INetworkClientV2.class,
                 Collections.singletonList(Errors.INVALID_CARD_OR_PIN.getValue()))).build());
         }
         String latestToken = UUID.randomUUID().toString();
@@ -85,17 +85,17 @@ public class NonCSNetworkClientV2 implements INetworkClientV2 {
         RemoteResponse.Builder<IAuthRecordV2> builder = RemoteResponse.newBuilder();
         if (loginRequest == null || loginRequest.getBody() == null
             || loginRequest.getBody().getCard() == null || loginRequest.getBody().getPin() == null)
-            return CompletableFuture.completedFuture(builder.setError(Error.of(INetworkClientV2.class,
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord.of(INetworkClientV2.class,
                 Collections.singletonList(Errors.ILLEGAL_PARAMETER_EXCEPTION.getValue()))).build());
         if (!cardNumberLoginRecordTable
             .containsKey(loginRequest.getBody().getCard().getCardNumber())) {
-            return CompletableFuture.completedFuture(builder.setError(Error.of(INetworkClientV2.class,
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord.of(INetworkClientV2.class,
                 Collections.singletonList(Errors.INVALID_CARD_OR_PIN.getValue()))).build());
         }
         String cardNumber = loginRequest.getBody().getCard().getCardNumber();
         if (cardNumberLoginRecordTable.containsKey(cardNumber) && !loginRequest.getBody().getPin()
             .getPinNumber().equals(cardNumberLoginRecordTable.get(cardNumber).getPinNumber())) {
-            return CompletableFuture.completedFuture(builder.setError(Error.of(INetworkClientV2.class,
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord.of(INetworkClientV2.class,
                 Collections.singletonList(Errors.INVALID_CARD_OR_PIN.getValue()))).build());
         }
         String latestToken = UUID.randomUUID().toString();
@@ -110,14 +110,14 @@ public class NonCSNetworkClientV2 implements INetworkClientV2 {
         RemoteResponse.Builder<IAccountsRecord> builder = RemoteResponse.newBuilder();
         if (tokenRequest == null || tokenRequest.getBody() == null || tokenRequest.getBody()
             .isEmpty()) {
-            return CompletableFuture.completedFuture(builder.setError(Error
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord
                 .of(INetworkClientV2.class,
                     Collections.singletonList(Errors.ILLEGAL_PARAMETER_EXCEPTION.getValue())))
                 .build());
         }
         if (!authTokenLastLoginTimeStampTable.containsKey(tokenRequest.getBody()) || isExpiredToken(
             authTokenLastLoginTimeStampTable.get(tokenRequest.getBody()))) {
-            return CompletableFuture.completedFuture(builder.setError(Error
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord
                 .of(INetworkClientV2.class,
                     Collections.singletonList(Errors.INVALID_TOKEN.getValue()))).build());
         }
@@ -144,13 +144,13 @@ public class NonCSNetworkClientV2 implements INetworkClientV2 {
             .getTokenId().isEmpty() || depositRequest.getBody().getAccount() == null
             || depositRequest.getBody().getAccount().getAccountNumber() == null || depositRequest
             .getBody().getAccount().getAccountNumber().isEmpty()) {
-            return CompletableFuture.completedFuture(builder.setError(Error.of(INetworkClientV2.class,
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord.of(INetworkClientV2.class,
                 Collections.singletonList(Errors.ILLEGAL_PARAMETER_EXCEPTION.getValue()))).build());
         }
         if (!authTokenLastLoginTimeStampTable.containsKey(depositRequest.getBody().getTokenId())
             || isExpiredToken(
             authTokenLastLoginTimeStampTable.get(depositRequest.getBody().getTokenId()))) {
-            return CompletableFuture.completedFuture(builder.setError(Error.of(INetworkClientV2.class,
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord.of(INetworkClientV2.class,
                 Collections.singletonList(Errors.INVALID_TOKEN.getValue()))).build());
         }
         String cardNumber = authTokenCardNumberTable.get(depositRequest.getBody().getTokenId());
@@ -160,7 +160,7 @@ public class NonCSNetworkClientV2 implements INetworkClientV2 {
         Integer existingBalance = accountRecord.getBalance();
         Integer depositAmount = depositRequest.getBody().getAmount();
         if (existingBalance.longValue() + depositAmount.longValue() > Integer.MAX_VALUE) {
-            return CompletableFuture.completedFuture(builder.setError(Error.of(INetworkClientV2.class,
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord.of(INetworkClientV2.class,
                 Collections.singletonList(Errors.MAX_BALANCE_REACHED.getValue()))).build());
         }
         AccountRecord latestAccountRecord =
@@ -188,13 +188,13 @@ public class NonCSNetworkClientV2 implements INetworkClientV2 {
             .getTokenId().isEmpty() || withdrawRequest.getBody().getAccount() == null
             || withdrawRequest.getBody().getAccount().getAccountNumber() == null || withdrawRequest
             .getBody().getAccount().getAccountNumber().isEmpty()) {
-            return CompletableFuture.completedFuture(builder.setError(Error.of(INetworkClientV2.class,
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord.of(INetworkClientV2.class,
                 Collections.singletonList(Errors.ILLEGAL_PARAMETER_EXCEPTION.getValue()))).build());
         }
         if (!authTokenLastLoginTimeStampTable.containsKey(withdrawRequest.getBody().getTokenId())
             || isExpiredToken(
             authTokenLastLoginTimeStampTable.get(withdrawRequest.getBody().getTokenId()))) {
-            return CompletableFuture.completedFuture(builder.setError(Error.of(INetworkClientV2.class,
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord.of(INetworkClientV2.class,
                 Collections.singletonList(Errors.INVALID_TOKEN.getValue()))).build());
         }
         String cardNumber = authTokenCardNumberTable.get(withdrawRequest.getBody().getTokenId());
@@ -204,7 +204,7 @@ public class NonCSNetworkClientV2 implements INetworkClientV2 {
         Integer existingBalance = accountRecord.getBalance();
         Integer withdrawAmount = withdrawRequest.getBody().getAmount();
         if (existingBalance.longValue() - withdrawAmount.longValue() < 0) {
-            return CompletableFuture.completedFuture(builder.setError(Error.of(INetworkClientV2.class,
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord.of(INetworkClientV2.class,
                 Collections.singletonList(Errors.ZERO_BALANCE_REACHED.getValue()))).build());
         }
         AccountRecord latestAccountRecord =

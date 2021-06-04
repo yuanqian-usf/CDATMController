@@ -37,8 +37,8 @@ public class Deposit implements IDeposit {
   }
 
   @Override public String toString() {
-    return "Deposit{" + "account=" + account + ", amount=" + amount + ", timeStamp=" + timeStamp
-        + '}';
+    return "Deposit{\n" + "account=" + account + ", amount=" + amount + ", timeStamp=" + timeStamp
+        + "}\n";
   }
 
   public static class Builder {

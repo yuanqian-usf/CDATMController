@@ -25,8 +25,8 @@ public class WithdrawRecordRequest extends WithdrawRecord implements IWithdrawRe
   }
 
   @Override public String toString() {
-    return "WithdrawRecordRequest{" + "tokenId='" + tokenId + '\'' + ", account=" + account
-        + ", amount=" + amount + ", timeStamp=" + timeStamp + '}';
+    return "WithdrawRecordRequest{\n" + "tokenId='" + tokenId + '\'' + ", account=" + account
+        + ", amount=" + amount + ", timeStamp=" + timeStamp + "}\n";
   }
 
   public static class Builder extends WithdrawRecord.Builder {

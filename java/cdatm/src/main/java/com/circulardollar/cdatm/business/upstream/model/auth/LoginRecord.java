@@ -13,7 +13,7 @@ public class LoginRecord implements ILoginRecord {
   private final IPinRecord pin;
 
   @Override public String toString() {
-    return "LoginRecord{" + "card=" + card + ", pin=" + pin + '}';
+    return "LoginRecord{\n" + "card=" + card + ", pin=" + pin + "}\n";
   }
 
   LoginRecord(ICardRecord card, IPinRecord pin) {

@@ -38,7 +38,7 @@ public class ATMValidator implements IATMValidator {
     return atmConfigurations;
   }
 
-  private ATMValidator(
+  ATMValidator(
       IATMConfigurations atmConfigurations,
       IValidator<IATMConfigurations> configurationsValidator,
       IValidator<IATMStateController> stateControllerValidator,
@@ -72,7 +72,8 @@ public class ATMValidator implements IATMValidator {
     return new Builder(iatmConfigurations);
   }
 
-  private <T extends IValidator<?>> T initValidator(T inputValidator, T defaultValidator) {
+  <T extends IValidator<?>> T initValidator(T inputValidator, T defaultValidator) {
+    Objects.requireNonNull(defaultValidator);
     if (inputValidator == null) return defaultValidator;
     return inputValidator;
   }
@@ -130,6 +131,7 @@ public class ATMValidator implements IATMValidator {
     private IValidator<IWithdraw> withdrawValidator;
 
     private Builder(IATMConfigurations atmConfigurations) {
+      Objects.requireNonNull(atmConfigurations);
       this.atmConfigurations = atmConfigurations;
     }
 

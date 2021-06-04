@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Objects;
 
-public class Error implements IError {
+public class ErrorRecord implements IErrorRecord {
   @SerializedName("errorCode")
   @Expose
   private final Integer errorCode;
@@ -14,21 +14,21 @@ public class Error implements IError {
   @Expose
   private final List<String> errorMessages;
 
-  private Error(Integer errorCode, List<String> errorMessages) {
+  ErrorRecord(Integer errorCode, List<String> errorMessages) {
     Objects.requireNonNull(errorCode);
     Objects.requireNonNull(errorMessages);
     this.errorCode = errorCode;
     this.errorMessages = errorMessages;
   }
 
-  public static IError of(Class<?> className, List<String> errorMessages) {
+  public static IErrorRecord of(Class<?> className, List<String> errorMessages) {
     Objects.requireNonNull(className);
     Objects.requireNonNull(errorMessages);
     int errorHash = className.hashCode();
     for (String s : errorMessages) {
       errorHash = s.hashCode() + errorHash * 31;
     }
-    return new Error(errorHash, errorMessages);
+    return new ErrorRecord(errorHash, errorMessages);
   }
 
   @Override
@@ -46,7 +46,7 @@ public class Error implements IError {
   }
 
   @Override public String toString() {
-    return "Error{" + "errorCode=" + errorCode + ", errorMessages=" + errorMessages + '}';
+    return "Error{\n" + "errorCode=" + errorCode + ", errorMessages=" + errorMessages + "}\n";
   }
 
 
@@ -70,8 +70,8 @@ public class Error implements IError {
       return this;
     }
 
-    public Error build() {
-      return new Error(errorCode, errorMessages);
+    public ErrorRecord build() {
+      return new ErrorRecord(errorCode, errorMessages);
     }
   }
 }

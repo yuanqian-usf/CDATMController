@@ -1,5 +1,7 @@
 package com.circulardollar.cdatm.utils;
 
+import com.circulardollar.cdatm.business.downstream.model.withdraw.IWithdraw;
+
 import java.util.List;
 
 public class Messages {
