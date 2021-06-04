@@ -1,13 +1,14 @@
 package com.circulardollar.cdatm.business.upstream.response;
 
-import com.circulardollar.cdatm.business.upstream.model.error.IError;
+import com.circulardollar.cdatm.business.upstream.model.error.IErrorRecord;
 import com.circulardollar.cdatm.constant.Errors;
 
-public class RemoteResponse<T> implements IRemoteResponse<T, IError> {
-  private final T body;
-  private final IError error;
+public class RemoteResponse<T> implements IRemoteResponse<T, IErrorRecord> {
 
-  protected RemoteResponse(T body, IError error) {
+  private final T body;
+  private final IErrorRecord error;
+
+  RemoteResponse(T body, IErrorRecord error) {
     this.body = body;
     this.error = error;
     if (!validate()) {
@@ -25,7 +26,7 @@ public class RemoteResponse<T> implements IRemoteResponse<T, IError> {
   }
 
   @Override
-  public IError getError() {
+  public IErrorRecord getError() {
     return error;
   }
 
@@ -35,11 +36,11 @@ public class RemoteResponse<T> implements IRemoteResponse<T, IError> {
 
   public static class Builder<T> {
     private T body;
-    private IError error;
+    private IErrorRecord error;
 
     private Builder() {}
 
-    public RemoteResponse.Builder<T> setError(IError error) {
+    public RemoteResponse.Builder<T> setError(IErrorRecord error) {
       this.body = null;
       this.error = error;
       return this;

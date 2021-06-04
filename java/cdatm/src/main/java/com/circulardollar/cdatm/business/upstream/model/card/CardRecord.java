@@ -13,8 +13,8 @@ public class CardRecord implements ICardRecord {
   private final String expirationDate;
 
   @Override public String toString() {
-    return "CardRecord{" + "holderName='" + holderName + '\'' + ", cardNumber='" + cardNumber + '\''
-        + ", cvc='" + cvc + '\'' + ", expirationDate='" + expirationDate + '\'' + '}';
+    return "CardRecord{\n" + "holderName='" + holderName + '\'' + ", cardNumber='" + cardNumber + '\''
+        + ", cvc='" + cvc + '\'' + ", expirationDate='" + expirationDate + '\'' + "}\n";
   }
 
   CardRecord(String holderName, String cardNumber, String cvc, String expirationDate) {

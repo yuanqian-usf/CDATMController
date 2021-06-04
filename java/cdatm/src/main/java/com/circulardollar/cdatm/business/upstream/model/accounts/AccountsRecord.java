@@ -10,7 +10,7 @@ public class AccountsRecord implements IAccountsRecord {
   private final Long timeStamp;
 
   @Override public String toString() {
-    return "AccountsRecord{" + "accounts=" + accounts + ", timeStamp=" + timeStamp + '}';
+    return "AccountsRecord{\n" + "accounts=" + accounts + ", timeStamp=" + timeStamp + "}\n";
   }
 
   AccountsRecord(List<AccountRecord> accounts, Long timeStamp) {

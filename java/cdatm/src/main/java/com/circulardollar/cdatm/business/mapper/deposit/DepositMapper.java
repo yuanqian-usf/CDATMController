@@ -11,6 +11,9 @@ import com.circulardollar.cdatm.business.upstream.model.deposit.IDepositRecordRe
 
 public class DepositMapper {
   public static IDeposit down(IDepositRecord record) {
+    if(record == null) {
+      return null;
+    }
     return Deposit.newBuilder()
         .setAccount(AccountMapper.down(record.getAccount()))
         .setAmount(record.getAmount())
@@ -19,6 +22,9 @@ public class DepositMapper {
   }
 
   public static IDepositRecord up(IDeposit deposit) {
+    if(deposit == null) {
+      return null;
+    }
     return DepositRecord.newBuilder()
         .setAccount(AccountMapper.up(deposit.getAccount()))
         .setAmount(deposit.getAmount())
@@ -27,6 +33,8 @@ public class DepositMapper {
   }
 
   public static IDepositRecordRequest parse(IDepositRecord record, String tokenId) {
+    if (record == null) return null;
+    if (tokenId == null) return null;
     return DepositRecordRequest.newBuilder()
         .setAccount(AccountRecord.newBuilder().setAccountNumber(record.getAccount().getAccountNumber()).setBalance(record.getAccount().getBalance()).build())
         .setAmount(record.getAmount())

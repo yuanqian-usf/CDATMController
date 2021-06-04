@@ -39,8 +39,8 @@ public class Auth implements IAuth {
   }
 
   @Override public String toString() {
-    return "Auth{" + "tokenId='" + tokenId + '\'' + ", accounts=" + accounts + ", timeStamp="
-        + timeStamp + '}';
+    return "Auth{\n" + "tokenId='" + tokenId + '\'' + ", accounts=" + accounts + ", timeStamp="
+        + timeStamp + "}\n";
   }
 
   public static class Builder {

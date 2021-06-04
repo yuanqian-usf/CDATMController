@@ -7,7 +7,7 @@ public class AuthRecordV2 implements IAuthRecordV2 {
   private final Long timeStamp;
 
   @Override public String toString() {
-    return "AuthRecordV2{" + "tokenId='" + tokenId + '\'' + ", timeStamp=" + timeStamp + '}';
+    return "AuthRecordV2{\n" + "tokenId='" + tokenId + '\'' + ", timeStamp=" + timeStamp + "}\n";
   }
 
   AuthRecordV2(String tokenId, Long timeStamp) {

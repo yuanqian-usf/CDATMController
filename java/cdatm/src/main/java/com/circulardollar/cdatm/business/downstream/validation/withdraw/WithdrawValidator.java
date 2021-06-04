@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+//TODO: Mock Dependencies
 public class WithdrawValidator implements IValidator<IWithdraw> {
 
   private static final String GET_WITHDRAW_AMOUNT = "GET_WITHDRAW_AMOUNT";
@@ -19,6 +20,7 @@ public class WithdrawValidator implements IValidator<IWithdraw> {
   private static final String EXCEEDS_MAX_AMOUNT = "EXCEEDS_MAX_AMOUNT";
   private static final String BELOW_MIN_AMOUNT = "BELOW_MIN_AMOUNT";
   private static final String EXCEEDS_BALANCE_AMOUNT = "EXCEEDS_BALANCE_AMOUNT";
+  private static final String GET_ACCOUNT = "GET_ACCOUNT";
 
   private final IATMConfigurations atmConfigurations;
 
@@ -33,7 +35,7 @@ public class WithdrawValidator implements IValidator<IWithdraw> {
       errorMessages.add(Messages.getIllegalArgumentExceptionForClass(IWithdraw.class));
     } else {
       if (withdraw.getAccount() == null) {
-        errorMessages.add(Messages.getIllegalArgumentExceptionForClass(IAccount.class));
+        errorMessages.add(Messages.getNullPointerExceptionForMethod(GET_ACCOUNT));
       }
       if (withdraw.getAmount() <= 0) {
         errorMessages.add(

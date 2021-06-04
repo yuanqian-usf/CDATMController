@@ -7,6 +7,9 @@ import com.circulardollar.cdatm.business.upstream.model.card.ICardRecord;
 
 public class CardMapper {
   public static ICardRecord up(ICard card) {
+    if(card == null) {
+      return null;
+    }
     return CardRecord.newBuilder()
         .setHolderName(card.getHolderName())
         .setCardNumber(card.getCardNumber())
@@ -16,6 +19,9 @@ public class CardMapper {
   }
 
   public static ICard down(ICardRecord card) {
+    if (card == null) {
+      return null;
+    }
     return Card.newBuilder()
         .setHolderName(card.getHolderName())
         .setCardNumber(card.getCardNumber())

@@ -15,7 +15,7 @@ public class ATMConfigurations implements IATMConfigurations {
   private final Integer maxWithdrawAmount;
   private final APIVersions apiVersions;
 
-  private ATMConfigurations(
+  ATMConfigurations(
       Integer minCardNumberLength,
       Integer maxCardNumberLength,
       Integer minPinLength,
@@ -59,7 +59,7 @@ public class ATMConfigurations implements IATMConfigurations {
     private Integer maxDepositAmount = MAX_DEPOSIT_AMOUNT;
     private Integer minWithdrawAmount = MIN_WITHDRAW_AMOUNT;
     private Integer maxWithdrawAmount = MAX_WITHDRAW_AMOUNT;
-    private APIVersions apiVersions = APIVersions.V2;
+    private APIVersions apiVersions = APIVersions.V1;
 
     public Builder setMinCardNumberLength(Integer length) {
       Objects.requireNonNull(length);

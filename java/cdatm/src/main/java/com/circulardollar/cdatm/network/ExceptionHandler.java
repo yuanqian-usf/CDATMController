@@ -1,6 +1,6 @@
 package com.circulardollar.cdatm.network;
 
-import com.circulardollar.cdatm.business.upstream.model.error.Error;
+import com.circulardollar.cdatm.business.upstream.model.error.ErrorRecord;
 import com.circulardollar.cdatm.business.upstream.response.RemoteResponse;
 import com.circulardollar.cdatm.constant.Errors;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class ExceptionHandler {
     }
     if (!errorMessages.isEmpty()) {
       return RemoteResponse.<T>newBuilder()
-          .setError(Error.of(future.getClass(), errorMessages))
+          .setError(ErrorRecord.of(future.getClass(), errorMessages))
           .build();
     }
     return response;

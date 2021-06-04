@@ -38,8 +38,8 @@ public class Withdraw implements IWithdraw {
   }
 
   @Override public String toString() {
-    return "Withdraw{" + "amount=" + amount + ", account=" + account + ", timeStamp=" + timeStamp
-        + '}';
+    return "Withdraw{\n" + "amount=" + amount + ", account=" + account + ", timeStamp=" + timeStamp
+        + "}\n";
   }
 
   public static class Builder {

@@ -36,8 +36,8 @@ public class AccountRecord implements IAccountRecord {
   }
 
   @Override public String toString() {
-    return "AccountRecord{" + "accountNumber='" + accountNumber + '\'' + ", balance=" + balance
-        + '}';
+    return "AccountRecord{\n" + "accountNumber='" + accountNumber + '\'' + ", balance=" + balance
+        + "}\n";
   }
 
   public static class Builder {

@@ -35,6 +35,6 @@ public class Error implements IError {
   }
 
   @Override public String toString() {
-    return "Error{" + "errorCode=" + errorCode + ", errorMessages=" + errorMessages + '}';
+    return "Error{\n" + "errorCode=" + errorCode + ", errorMessages=" + errorMessages + "}\n";
   }
 }

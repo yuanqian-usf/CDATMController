@@ -31,7 +31,7 @@ public class Login implements ILogin {
   }
 
   @Override public String toString() {
-    return "Login{" + "card=" + card + ", pin=" + pin + '}';
+    return "Login{\n" + "card=" + card + ", pin=" + pin + "}\n";
   }
 
   public static class Builder {

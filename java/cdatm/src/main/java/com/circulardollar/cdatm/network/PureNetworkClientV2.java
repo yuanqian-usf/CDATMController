@@ -6,8 +6,8 @@ import com.circulardollar.cdatm.business.upstream.model.auth.*;
 import com.circulardollar.cdatm.business.upstream.model.deposit.DepositRecord;
 import com.circulardollar.cdatm.business.upstream.model.deposit.IDepositRecord;
 import com.circulardollar.cdatm.business.upstream.model.deposit.IDepositRecordRequest;
-import com.circulardollar.cdatm.business.upstream.model.error.Error;
-import com.circulardollar.cdatm.business.upstream.model.error.IError;
+import com.circulardollar.cdatm.business.upstream.model.error.ErrorRecord;
+import com.circulardollar.cdatm.business.upstream.model.error.IErrorRecord;
 import com.circulardollar.cdatm.business.upstream.model.withdraw.IWithdrawRecord;
 import com.circulardollar.cdatm.business.upstream.model.withdraw.IWithdrawRecordRequest;
 import com.circulardollar.cdatm.business.upstream.model.withdraw.WithdrawRecord;
@@ -59,7 +59,7 @@ public class PureNetworkClientV2 implements INetworkClientV2 {
         RemoteResponse.Builder<IAuthRecord> builder = RemoteResponse.newBuilder();
         if (request == null || request.getBody() == null || request.getBody().getCard() == null
             || request.getBody().getPin() == null)
-            return CompletableFuture.completedFuture(builder.setError(Error
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord
                 .of(INetworkClientV2.class,
                     Collections.singletonList(Errors.ILLEGAL_PARAMETER_EXCEPTION.getValue())))
                 .build());
@@ -82,7 +82,7 @@ public class PureNetworkClientV2 implements INetworkClientV2 {
                         String json = EntityUtils.toString(result.getEntity(), "UTF-8");
                         handleResponse(AuthRecord.class, responseBuilder, json);
                     } catch (IOException e1) {
-                        responseBuilder.setError(Error.of(PureNetworkClientV2.class,
+                        responseBuilder.setError(ErrorRecord.of(PureNetworkClientV2.class,
                             Arrays.asList(Errors.IO_EXCEPTION.getValue(), e1.getMessage())));
                     }
                     completableFuture.complete(responseBuilder.build());
@@ -98,7 +98,7 @@ public class PureNetworkClientV2 implements INetworkClientV2 {
         RemoteResponse.Builder<IAuthRecordV2> builder = RemoteResponse.newBuilder();
         if (request == null || request.getBody() == null || request.getBody().getCard() == null
             || request.getBody().getPin() == null)
-            return CompletableFuture.completedFuture(builder.setError(Error
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord
                 .of(INetworkClientV2.class,
                     Collections.singletonList(Errors.ILLEGAL_PARAMETER_EXCEPTION.getValue())))
                 .build());
@@ -120,7 +120,7 @@ public class PureNetworkClientV2 implements INetworkClientV2 {
                         String json = EntityUtils.toString(result.getEntity(), "UTF-8");
                         handleResponse(AuthRecordV2.class, responseBuilder, json);
                     } catch (IOException e1) {
-                        responseBuilder.setError(Error.of(PureNetworkClientV2.class,
+                        responseBuilder.setError(ErrorRecord.of(PureNetworkClientV2.class,
                             Arrays.asList(Errors.IO_EXCEPTION.getValue(), e1.getMessage())));
                     }
                     completableFuture.complete(responseBuilder.build());
@@ -135,7 +135,7 @@ public class PureNetworkClientV2 implements INetworkClientV2 {
         IRemoteRequest<String> request) {
         RemoteResponse.Builder<IAccountsRecord> builder = RemoteResponse.newBuilder();
         if (request == null || request.getBody() == null || request.getBody().isEmpty()) {
-            return CompletableFuture.completedFuture(builder.setError(Error
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord
                 .of(INetworkClientV2.class,
                     Collections.singletonList(Errors.ILLEGAL_PARAMETER_EXCEPTION.getValue())))
                 .build());
@@ -156,7 +156,7 @@ public class PureNetworkClientV2 implements INetworkClientV2 {
                         String json = EntityUtils.toString(result.getEntity(), "UTF-8");
                         handleResponse(AccountsRecord.class, responseBuilder, json);
                     } catch (IOException e1) {
-                        responseBuilder.setError(Error.of(PureNetworkClientV2.class,
+                        responseBuilder.setError(ErrorRecord.of(PureNetworkClientV2.class,
                             Arrays.asList(Errors.IO_EXCEPTION.getValue(), e1.getMessage())));
                     }
                     completableFuture.complete(responseBuilder.build());
@@ -174,7 +174,7 @@ public class PureNetworkClientV2 implements INetworkClientV2 {
             || request.getBody().getTokenId().isEmpty() || request.getBody().getAccount() == null
             || request.getBody().getAccount().getAccountNumber() == null || request.getBody()
             .getAccount().getAccountNumber().isEmpty()) {
-            return CompletableFuture.completedFuture(builder.setError(Error
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord
                 .of(INetworkClientV2.class,
                     Collections.singletonList(Errors.ILLEGAL_PARAMETER_EXCEPTION.getValue())))
                 .build());
@@ -201,7 +201,7 @@ public class PureNetworkClientV2 implements INetworkClientV2 {
                         String json = EntityUtils.toString(result.getEntity(), "UTF-8");
                         handleResponse(DepositRecord.class, responseBuilder, json);
                     } catch (IOException e1) {
-                        responseBuilder.setError(Error.of(PureNetworkClientV2.class,
+                        responseBuilder.setError(ErrorRecord.of(PureNetworkClientV2.class,
                             Arrays.asList(Errors.IO_EXCEPTION.getValue(), e1.getMessage())));
                     }
                     completableFuture.complete(responseBuilder.build());
@@ -220,7 +220,7 @@ public class PureNetworkClientV2 implements INetworkClientV2 {
             || request.getBody().getTokenId().isEmpty() || request.getBody().getAccount() == null
             || request.getBody().getAccount().getAccountNumber() == null || request.getBody()
             .getAccount().getAccountNumber().isEmpty()) {
-            return CompletableFuture.completedFuture(builder.setError(Error
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord
                 .of(INetworkClientV2.class,
                     Collections.singletonList(Errors.ILLEGAL_PARAMETER_EXCEPTION.getValue())))
                 .build());
@@ -248,7 +248,7 @@ public class PureNetworkClientV2 implements INetworkClientV2 {
                         String json = EntityUtils.toString(result.getEntity(), "UTF-8");
                         handleResponse(WithdrawRecord.class, responseBuilder, json);
                     } catch (IOException e1) {
-                        responseBuilder.setError(Error.of(PureNetworkClientV2.class,
+                        responseBuilder.setError(ErrorRecord.of(PureNetworkClientV2.class,
                             Arrays.asList(Errors.IO_EXCEPTION.getValue(), e1.getMessage())));
                     }
                     completableFuture.complete(responseBuilder.build());
@@ -263,7 +263,7 @@ public class PureNetworkClientV2 implements INetworkClientV2 {
         IRemoteRequest<ILogoutRecordRequest> request) {
         RemoteResponse.Builder<ILogoutRecord> builder = RemoteResponse.newBuilder();
         if (request.getBody().getTokenId() == null) {
-            return CompletableFuture.completedFuture(builder.setError(Error
+            return CompletableFuture.completedFuture(builder.setError(ErrorRecord
                 .of(INetworkClientV2.class,
                     Collections.singletonList(Errors.INVALID_TOKEN.getValue()))).build());
         }
@@ -290,7 +290,7 @@ public class PureNetworkClientV2 implements INetworkClientV2 {
                         String json = EntityUtils.toString(result.getEntity(), "UTF-8");
                         handleResponse(LogoutRecord.class, responseBuilder, json);
                     } catch (IOException e1) {
-                        responseBuilder.setError(Error.of(PureNetworkClientV2.class,
+                        responseBuilder.setError(ErrorRecord.of(PureNetworkClientV2.class,
                             Arrays.asList(Errors.IO_EXCEPTION.getValue(), e1.getMessage())));
                     }
                     completableFuture.complete(responseBuilder.build());
@@ -305,7 +305,7 @@ public class PureNetworkClientV2 implements INetworkClientV2 {
         RemoteResponse.Builder<S> responseBuilder, String json) {
         Gson gson = new Gson();
         try {
-            IError error = gson.fromJson(json, Error.class);
+            IErrorRecord error = gson.fromJson(json, ErrorRecord.class);
             if (error.getErrorCode() != null) {
                 responseBuilder.setError(error);
                 return;
@@ -313,7 +313,7 @@ public class PureNetworkClientV2 implements INetworkClientV2 {
             S response = gson.fromJson(json, responseClass);
             responseBuilder.setBody(response);
         } catch (Exception e) {
-            responseBuilder.setError(Error.of(PureNetworkClientV2.class,
+            responseBuilder.setError(ErrorRecord.of(PureNetworkClientV2.class,
                 Arrays.asList(Errors.JSON_PARSE_EXCEPTION.getValue(), e.getMessage())));
         }
     }
