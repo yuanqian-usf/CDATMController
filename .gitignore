@@ -39,3 +39,21 @@ gradle-app.setting
 **/build/
 
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle,intellij
+
+# Dependency directories
+node_modules/
+
+# End of https://github.com/github/gitignore/blob/master/Node.gitignore
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+# End of https://github.com/github/gitignore/blob/master/Global/VisualStudioCode.gitignore
+
