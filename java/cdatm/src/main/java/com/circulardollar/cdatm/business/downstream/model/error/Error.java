@@ -19,7 +19,7 @@ public class Error implements IError {
     Objects.requireNonNull(errorMessages);
     int errorHash = className.hashCode();
     for (String s : errorMessages) {
-      errorHash = s.hashCode() + errorHash * 31;
+      errorHash = (s == null ? 31 : s.hashCode()) + errorHash * 31;
     }
     return new Error(errorHash, errorMessages);
   }

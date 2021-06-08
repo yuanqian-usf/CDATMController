@@ -1,15 +1,23 @@
 package com.circulardollar.cdatm.business.upstream.model.withdraw;
 
-import com.circulardollar.cdatm.business.upstream.model.account.AccountRecord;
 import com.circulardollar.cdatm.business.upstream.model.account.IAccountRecord;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 
 public class WithdrawRecord implements IWithdrawRecord {
-  final AccountRecord account;
+
+  @SerializedName("account")
+  @Expose
+  final IAccountRecord account;
+  @SerializedName("amount")
+  @Expose
   final Integer amount;
+  @SerializedName("timeStamp")
+  @Expose
   final Long timeStamp;
 
-  WithdrawRecord(AccountRecord account, Integer amount, Long timeStamp) {
+  WithdrawRecord(IAccountRecord account, Integer amount, Long timeStamp) {
     Objects.requireNonNull(account);
     Objects.requireNonNull(amount);
     Objects.requireNonNull(timeStamp);
@@ -44,16 +52,14 @@ public class WithdrawRecord implements IWithdrawRecord {
 
   public static class Builder {
 
-    private AccountRecord account;
+    private IAccountRecord account;
     private Integer amount;
     private Long timeStamp;
 
     protected Builder() {}
 
-    public Builder setAccount(AccountRecord account) {
-      Objects.requireNonNull(account);
-      this.account = account;
-      return this;
+    protected IAccountRecord getAccount() {
+      return account;
     }
 
     public Builder setAmount(Integer amount) {
@@ -68,8 +74,10 @@ public class WithdrawRecord implements IWithdrawRecord {
       return this;
     }
 
-    protected AccountRecord getAccount() {
-      return account;
+    public Builder setAccount(IAccountRecord account) {
+      Objects.requireNonNull(account);
+      this.account = account;
+      return this;
     }
 
     protected Integer getAmount() {

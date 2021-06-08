@@ -10,6 +10,7 @@ public class ErrorRecord implements IErrorRecord {
   @SerializedName("errorCode")
   @Expose
   private final Integer errorCode;
+
   @SerializedName("errorMessages")
   @Expose
   private final List<String> errorMessages;
@@ -26,9 +27,13 @@ public class ErrorRecord implements IErrorRecord {
     Objects.requireNonNull(errorMessages);
     int errorHash = className.hashCode();
     for (String s : errorMessages) {
-      errorHash = s.hashCode() + errorHash * 31;
+      errorHash = (s == null ? 31 : s.hashCode()) + errorHash * 31;
     }
     return new ErrorRecord(errorHash, errorMessages);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
   }
 
   @Override
@@ -41,28 +46,22 @@ public class ErrorRecord implements IErrorRecord {
     return errorMessages;
   }
 
-  public static Builder newBuilder() {
-   return new Builder();
-  }
-
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "Error{\n" + "errorCode=" + errorCode + ", errorMessages=" + errorMessages + "}\n";
   }
-
 
   public static class Builder {
     private Integer errorCode;
     private List<String> errorMessages;
 
-    private Builder() {
-    }
+    private Builder() {}
 
     public Builder setErrorCode(Integer errorCode) {
       Objects.requireNonNull(errorCode);
       this.errorCode = errorCode;
       return this;
     }
-
 
     public Builder setErrorMessages(List<String> errorMessages) {
       Objects.requireNonNull(errorMessages);

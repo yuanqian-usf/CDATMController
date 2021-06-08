@@ -9,37 +9,33 @@ import com.circulardollar.cdatm.business.upstream.model.deposit.DepositRecordReq
 import com.circulardollar.cdatm.business.upstream.model.deposit.IDepositRecord;
 import com.circulardollar.cdatm.business.upstream.model.deposit.IDepositRecordRequest;
 
-public class DepositMapper {
-  public static IDeposit down(IDepositRecord record) {
-    if(record == null) {
-      return null;
-    }
-    return Deposit.newBuilder()
-        .setAccount(AccountMapper.down(record.getAccount()))
-        .setAmount(record.getAmount())
-        .setTimeStamp(record.getTimeStamp())
-        .build();
-  }
+public final class DepositMapper {
+    private DepositMapper() {}
 
-  public static IDepositRecord up(IDeposit deposit) {
-    if(deposit == null) {
-      return null;
+    public static IDeposit down(IDepositRecord record) {
+        if (record == null) {
+            return null;
+        }
+        return Deposit.newBuilder().setAccount(AccountMapper.down(record.getAccount()))
+            .setAmount(record.getAmount()).setTimeStamp(record.getTimeStamp()).build();
     }
-    return DepositRecord.newBuilder()
-        .setAccount(AccountMapper.up(deposit.getAccount()))
-        .setAmount(deposit.getAmount())
-        .setTimeStamp(deposit.getTimeStamp())
-        .build();
-  }
 
-  public static IDepositRecordRequest parse(IDepositRecord record, String tokenId) {
-    if (record == null) return null;
-    if (tokenId == null) return null;
-    return DepositRecordRequest.newBuilder()
-        .setAccount(AccountRecord.newBuilder().setAccountNumber(record.getAccount().getAccountNumber()).setBalance(record.getAccount().getBalance()).build())
-        .setAmount(record.getAmount())
-        .setTimeStamp(record.getTimeStamp())
-        .setTokenId(tokenId)
-        .build();
-  }
+    public static IDepositRecord up(IDeposit deposit) {
+        if (deposit == null) {
+            return null;
+        }
+        return DepositRecord.newBuilder().setAccount(AccountMapper.up(deposit.getAccount()))
+            .setAmount(deposit.getAmount()).setTimeStamp(deposit.getTimeStamp()).build();
+    }
+
+    public static IDepositRecordRequest parse(IDepositRecord record, String tokenId) {
+        if (record == null)
+            return null;
+        if (tokenId == null)
+            return null;
+        return DepositRecordRequest.newBuilder().setAccount(
+            AccountRecord.newBuilder().setAccountNumber(record.getAccount().getAccountNumber())
+                .setBalance(record.getAccount().getBalance()).build()).setAmount(record.getAmount())
+            .setTimeStamp(record.getTimeStamp()).setTokenId(tokenId).build();
+    }
 }

@@ -9,7 +9,8 @@ import com.circulardollar.cdatm.business.upstream.model.withdraw.IWithdrawRecord
 import com.circulardollar.cdatm.business.upstream.model.withdraw.WithdrawRecord;
 import com.circulardollar.cdatm.business.upstream.model.withdraw.WithdrawRecordRequest;
 
-public class WithdrawMapper {
+public final class WithdrawMapper {
+  private WithdrawMapper() {}
 
   public static IWithdraw down(IWithdrawRecord record) {
     if (record == null) return null;
@@ -34,7 +35,10 @@ public class WithdrawMapper {
     if (tokenId == null) return null;
     return WithdrawRecordRequest.newBuilder()
         .setAccount(
-            AccountRecord.newBuilder().setAccountNumber(record.getAccount().getAccountNumber()).setBalance(record.getAccount().getBalance()).build())
+            AccountRecord.newBuilder()
+                .setAccountNumber(record.getAccount().getAccountNumber())
+                .setBalance(record.getAccount().getBalance())
+                .build())
         .setAmount(record.getAmount())
         .setTimeStamp(record.getTimeStamp())
         .setTokenId(tokenId)

@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class AccountMapper {
+public final class AccountMapper {
+  private AccountMapper() {}
 
   public static IAccount down(IAccountRecord account) {
     if (account == null) return null;

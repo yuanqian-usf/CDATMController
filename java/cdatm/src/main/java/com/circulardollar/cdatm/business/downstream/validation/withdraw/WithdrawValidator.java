@@ -1,25 +1,21 @@
 package com.circulardollar.cdatm.business.downstream.validation.withdraw;
 
-import com.circulardollar.cdatm.business.downstream.model.account.IAccount;
+import com.circulardollar.cdatm.business.downstream.model.withdraw.IWithdraw;
 import com.circulardollar.cdatm.business.downstream.model.error.Error;
 import com.circulardollar.cdatm.business.downstream.model.error.IError;
-import com.circulardollar.cdatm.business.downstream.model.withdraw.IWithdraw;
 import com.circulardollar.cdatm.business.downstream.validation.IValidator;
 import com.circulardollar.cdatm.config.IATMConfigurations;
+import com.circulardollar.cdatm.constant.Errors;
 import com.circulardollar.cdatm.utils.Messages;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-//TODO: Mock Dependencies
 public class WithdrawValidator implements IValidator<IWithdraw> {
 
-  private static final String GET_WITHDRAW_AMOUNT = "GET_WITHDRAW_AMOUNT";
-  private static final String INVALID_WITHDRAW_AMOUNT = "INVALID_WITHDRAW_AMOUNT";
-  private static final String EXCEEDS_MAX_AMOUNT = "EXCEEDS_MAX_AMOUNT";
-  private static final String BELOW_MIN_AMOUNT = "BELOW_MIN_AMOUNT";
-  private static final String EXCEEDS_BALANCE_AMOUNT = "EXCEEDS_BALANCE_AMOUNT";
+  private static final String POST_WITHDRAW = "POST_WITHDRAW";
   private static final String GET_ACCOUNT = "GET_ACCOUNT";
 
   private final IATMConfigurations atmConfigurations;
@@ -34,28 +30,25 @@ public class WithdrawValidator implements IValidator<IWithdraw> {
     if (withdraw == null) {
       errorMessages.add(Messages.getIllegalArgumentExceptionForClass(IWithdraw.class));
     } else {
-      if (withdraw.getAccount() == null) {
+      if (withdraw.getAccount() == null || withdraw.getAmount() == null) {
         errorMessages.add(Messages.getNullPointerExceptionForMethod(GET_ACCOUNT));
-      }
-      if (withdraw.getAmount() <= 0) {
-        errorMessages.add(
-            Messages.getIllegalArgumentExceptionForMethod(
-                GET_WITHDRAW_AMOUNT, Collections.singletonList((INVALID_WITHDRAW_AMOUNT))));
-      }
-      if (withdraw.getAmount() > withdraw.getAccount().getBalance()) {
-        errorMessages.add(
-            Messages.getIllegalArgumentExceptionForMethod(
-                GET_WITHDRAW_AMOUNT, Collections.singletonList((EXCEEDS_BALANCE_AMOUNT))));
-      }
-      if (withdraw.getAmount() > atmConfigurations.getMaxWithdrawAmount()) {
-        errorMessages.add(
-            Messages.getIllegalArgumentExceptionForMethod(
-                GET_WITHDRAW_AMOUNT, Collections.singletonList((EXCEEDS_MAX_AMOUNT))));
-      }
-      if (withdraw.getAmount() < atmConfigurations.getMinWithdrawAmount()) {
-        errorMessages.add(
-            Messages.getIllegalArgumentExceptionForMethod(
-                GET_WITHDRAW_AMOUNT, Collections.singletonList((BELOW_MIN_AMOUNT))));
+      } else {
+        if (withdraw.getAmount() <= 0) {
+          errorMessages.add(
+              Messages.getIllegalArgumentExceptionForMethod(POST_WITHDRAW, Collections.singletonList((Errors.INVALID_AMOUNT.getValue()))));
+        }
+        if ((long) withdraw.getAmount() > withdraw.getAccount().getBalance()) {
+          errorMessages.add(
+              Messages.getIllegalArgumentExceptionForMethod(POST_WITHDRAW, Collections.singletonList((Errors.EXCEEDS_BALANCE_AMOUNT.getValue()))));
+        }
+        if (withdraw.getAmount() > atmConfigurations.getMaxWithdrawAmount()) {
+          errorMessages.add(
+              Messages.getIllegalArgumentExceptionForMethod(POST_WITHDRAW, Collections.singletonList((Errors.EXCEEDS_MAX_AMOUNT.getValue()))));
+        }
+        if (withdraw.getAmount() < atmConfigurations.getMinWithdrawAmount()) {
+          errorMessages.add(
+              Messages.getIllegalArgumentExceptionForMethod(POST_WITHDRAW, Collections.singletonList((Errors.BELOW_MIN_AMOUNT.getValue()))));
+        }
       }
     }
     if (!errorMessages.isEmpty()) {
