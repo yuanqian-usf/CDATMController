@@ -1,9 +1,13 @@
 package com.circulardollar.cdatm.business.upstream.model.auth;
 
+import com.circulardollar.cdatm.business.upstream.model.account.AccountRecord;
+import com.circulardollar.cdatm.business.upstream.model.account.IAccountRecord;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.Test;
 
 import static com.circulardollar.cdatm.TestBase.*;
+import static com.circulardollar.cdatm.utils.network.InterfaceSerializer.interfaceSerializer;
 import static org.junit.Assert.*;
 
 public class AuthRecordTest {
@@ -65,7 +69,8 @@ public class AuthRecordTest {
 
 
     @Test public void testGson_on_success() {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().registerTypeAdapter(IAccountRecord.class, interfaceSerializer(
+            AccountRecord.class)).create();
         String json = "{\n" + "    \"accounts\": [\n" + "        {\n"
             + "            \"accountNumber\": \"8babde61-f4ad-4538-9d5c-e8de824c3584\",\n"
             + "            \"balance\": 668994890\n" + "        },\n" + "        {\n"

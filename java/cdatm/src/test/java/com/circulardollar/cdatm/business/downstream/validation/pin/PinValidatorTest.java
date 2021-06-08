@@ -1,9 +1,6 @@
 package com.circulardollar.cdatm.business.downstream.validation.pin;
 
-import com.circulardollar.cdatm.business.downstream.model.account.Account;
-import com.circulardollar.cdatm.business.downstream.model.deposit.Deposit;
 import com.circulardollar.cdatm.business.downstream.model.pin.Pin;
-import com.circulardollar.cdatm.business.downstream.validation.deposit.DepositValidator;
 import com.circulardollar.cdatm.config.ATMConfigurations;
 import com.circulardollar.cdatm.config.IATMConfigurations;
 import org.junit.Test;
@@ -23,7 +20,7 @@ public class PinValidatorTest {
     @Test public void validate_02() {
         assertFalse(new PinValidator(ATMConfigurations.newBuilder().build()).validate(
             Pin.newBuilder().setPinNumber(
-                randomValidPinNumber()).build())
+                validRandomPinNumber()).build())
             .isPresent());
     }
 

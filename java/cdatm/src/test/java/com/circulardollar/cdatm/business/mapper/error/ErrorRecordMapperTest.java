@@ -7,8 +7,9 @@ import java.util.List;
 
 import com.circulardollar.cdatm.business.upstream.model.error.IErrorRecord;
 import com.circulardollar.cdatm.business.upstream.model.error.ErrorRecord;
+
+import static com.circulardollar.cdatm.TestBase.randomList;
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.anyList;
 
 public class ErrorRecordMapperTest {
 
@@ -18,7 +19,7 @@ public class ErrorRecordMapperTest {
     }
 
     @Test public void ErrorMapper_down_02() {
-        List<String> mockList = anyList();
+        List<String> mockList = randomList();
         IErrorRecord error = ErrorRecord.of(Object.class, mockList);
         assertNotNull(ErrorMapper.down(error));
         assertNotNull(error.getErrorCode());
