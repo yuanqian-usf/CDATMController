@@ -15,8 +15,8 @@ import java.util.Optional;
 
 public class CardValidator implements IValidator<ICard> {
 
-    public static final String GET_CARD = "GET_CARD";
-    public static final String GET_CARD_NUMBER = "GET_CARD_NUMBER";
+    private static final String GET_CARD = "GET_CARD";
+    private static final String GET_CARD_NUMBER = "GET_CARD_NUMBER";
 
     private final IATMConfigurations atmConfigurations;
 

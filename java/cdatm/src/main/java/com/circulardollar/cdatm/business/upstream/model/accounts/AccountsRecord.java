@@ -1,19 +1,21 @@
 package com.circulardollar.cdatm.business.upstream.model.accounts;
 
-import com.circulardollar.cdatm.business.upstream.model.account.AccountRecord;
 import com.circulardollar.cdatm.business.upstream.model.account.IAccountRecord;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Objects;
 
 public class AccountsRecord implements IAccountsRecord {
-  private final List<AccountRecord> accounts;
+  @SerializedName("accounts")
+  @Expose
+  private final List<IAccountRecord> accounts;
+
+  @SerializedName("timeStamp")
+  @Expose
   private final Long timeStamp;
 
-  @Override public String toString() {
-    return "AccountsRecord{\n" + "accounts=" + accounts + ", timeStamp=" + timeStamp + "}\n";
-  }
-
-  AccountsRecord(List<AccountRecord> accounts, Long timeStamp) {
+  AccountsRecord(List<IAccountRecord> accounts, Long timeStamp) {
     Objects.requireNonNull(accounts);
     Objects.requireNonNull(timeStamp);
     this.accounts = accounts;
@@ -25,7 +27,12 @@ public class AccountsRecord implements IAccountsRecord {
   }
 
   @Override
-  public List<? extends IAccountRecord> getAccounts() {
+  public String toString() {
+    return "AccountsRecord{\n" + "accounts=" + accounts + ", timeStamp=" + timeStamp + "}\n";
+  }
+
+  @Override
+  public List<IAccountRecord> getAccounts() {
     return accounts;
   }
 
@@ -36,12 +43,12 @@ public class AccountsRecord implements IAccountsRecord {
 
   public static class Builder {
 
-    private List<AccountRecord> accounts;
+    private List<IAccountRecord> accounts;
     private Long timeStamp;
 
     private Builder() {}
 
-    public Builder setAccounts(List<AccountRecord> accounts) {
+    public Builder setAccounts(List<IAccountRecord> accounts) {
       Objects.requireNonNull(accounts);
       this.accounts = accounts;
       return this;

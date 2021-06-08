@@ -1,20 +1,13 @@
 package com.circulardollar.cdatm.state;
 
-import static com.circulardollar.cdatm.constant.ATMStates.ACTIVE;
-import static com.circulardollar.cdatm.constant.ATMStates.CHECK_BALANCE;
-import static com.circulardollar.cdatm.constant.ATMStates.DEPOSIT;
-import static com.circulardollar.cdatm.constant.ATMStates.INSERT_CARD;
-import static com.circulardollar.cdatm.constant.ATMStates.SELECT_ACCOUNT;
-import static com.circulardollar.cdatm.constant.ATMStates.VERIFY_PIN;
-import static com.circulardollar.cdatm.constant.ATMStates.WITHDRAW;
-
+import com.circulardollar.cdatm.business.downstream.model.error.Error;
+import com.circulardollar.cdatm.business.downstream.model.error.IError;
 import com.circulardollar.cdatm.constant.ATMStates;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+
+import com.circulardollar.cdatm.constant.UserInterface;
+import java.util.*;
+
+import static com.circulardollar.cdatm.constant.ATMStates.*;
 
 public class ATMStateController implements IATMStateController {
 
@@ -50,11 +43,14 @@ public class ATMStateController implements IATMStateController {
   }
 
   @Override
-  public Boolean canGoToNextState(Integer proposedNextStateId) {
+  public Optional<IError> canGoToNextState(Integer proposedNextStateId) {
     ATMStates proposedNextState = ATMStates.ofId(proposedNextStateId);
-    if (ATMStates.UNSPECIFIED == proposedNextState) return false;
+    Optional<IError> error = Optional.of(Error.of(
+        IATMStateController.class,
+        Collections.singletonList(UserInterface.OPERATION_NOT_ALLOWED.getValue())));
+    if (ATMStates.UNSPECIFIED == proposedNextState) return error;
     Set<ATMStates> availableStates = availableStates();
-    return availableStates.contains(proposedNextState);
+    return availableStates.contains(proposedNextState) ? Optional.empty() : error;
   }
 
   @Override

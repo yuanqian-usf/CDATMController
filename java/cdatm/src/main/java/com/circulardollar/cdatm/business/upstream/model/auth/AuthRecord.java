@@ -4,22 +4,24 @@ import com.circulardollar.cdatm.business.upstream.model.account.AccountRecord;
 import com.circulardollar.cdatm.business.upstream.model.account.IAccountRecord;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class AuthRecord implements IAuthRecord {
   @SerializedName("tokenId")
   @Expose
   private final String tokenId;
+
   @SerializedName("accounts")
   @Expose
-  private final List<AccountRecord> accounts;
+  private final List<IAccountRecord> accounts;
+
   @SerializedName("timeStamp")
   @Expose
   private final Long timeStamp;
 
-  AuthRecord(String tokenId, List<AccountRecord> accounts, Long timeStamp) {
+  AuthRecord(String tokenId, List<IAccountRecord> accounts, Long timeStamp) {
     Objects.requireNonNull(tokenId);
     Objects.requireNonNull(accounts);
     Objects.requireNonNull(timeStamp);
@@ -38,7 +40,7 @@ public class AuthRecord implements IAuthRecord {
   }
 
   @Override
-  public List<? extends IAccountRecord> getAccounts() {
+  public List<IAccountRecord> getAccounts() {
     return accounts;
   }
 
@@ -47,15 +49,23 @@ public class AuthRecord implements IAuthRecord {
     return timeStamp;
   }
 
-  @Override public String toString() {
-    return "AuthRecord{\n" + "tokenId='" + tokenId + '\'' + ", accounts=" + accounts + ", timeStamp="
-        + timeStamp + "}\n";
+  @Override
+  public String toString() {
+    return "AuthRecord{\n"
+        + "tokenId='"
+        + tokenId
+        + '\''
+        + ", accounts="
+        + accounts
+        + ", timeStamp="
+        + timeStamp
+        + "}\n";
   }
 
   public static class Builder {
 
     private String tokenId;
-    private List<AccountRecord> accounts;
+    private List<IAccountRecord> accounts;
     private Long timeStamp;
 
     private Builder() {}
@@ -66,7 +76,7 @@ public class AuthRecord implements IAuthRecord {
       return this;
     }
 
-    public Builder setAccounts(List<AccountRecord> accounts) {
+    public Builder setAccounts(List<IAccountRecord> accounts) {
       Objects.requireNonNull(accounts);
       this.accounts = accounts;
       return this;

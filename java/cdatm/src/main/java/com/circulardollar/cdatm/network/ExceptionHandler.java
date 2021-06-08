@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-public class ExceptionHandler {
+public final class ExceptionHandler {
+  private ExceptionHandler() {}
+
   public static <T> RemoteResponse<T> handleFuture(CompletableFuture<RemoteResponse<T>> future) {
     List<String> errorMessages = new ArrayList<>();
     RemoteResponse<T> response = null;

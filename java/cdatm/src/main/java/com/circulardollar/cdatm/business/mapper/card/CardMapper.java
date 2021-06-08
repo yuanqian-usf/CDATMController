@@ -5,9 +5,11 @@ import com.circulardollar.cdatm.business.downstream.model.card.ICard;
 import com.circulardollar.cdatm.business.upstream.model.card.CardRecord;
 import com.circulardollar.cdatm.business.upstream.model.card.ICardRecord;
 
-public class CardMapper {
+public final class CardMapper {
+  private CardMapper() {}
+
   public static ICardRecord up(ICard card) {
-    if(card == null) {
+    if (card == null) {
       return null;
     }
     return CardRecord.newBuilder()

@@ -6,7 +6,8 @@ import com.circulardollar.cdatm.business.mapper.card.CardMapper;
 import com.circulardollar.cdatm.business.mapper.pin.PinMapper;
 import com.circulardollar.cdatm.business.upstream.model.auth.ILoginRecord;
 
-public class LoginMapper {
+public final class LoginMapper {
+  private LoginMapper() {}
   public static ILogin down(ILoginRecord record) {
     if(record == null) {
       return null;
