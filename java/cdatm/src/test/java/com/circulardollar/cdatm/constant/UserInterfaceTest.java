@@ -9,7 +9,7 @@ public class UserInterfaceTest {
 
     @Test public void getValue() {
         assertEquals(UserInterface.WELCOME.getValue(), "Welcome to Circular Dollar ATM controller!");
-        assertEquals(UserInterface.CMD_EXIT.getValue(), "q");
+        assertEquals(UserInterface.EXIT.getValue(), "q");
         assertEquals(UserInterface.CMD_INSERT_CARD.getValue(), "insertCard <cardNumber>");
         assertEquals(UserInterface.CMD_VERIFY_PIN.getValue(), "verifyPin <pinNumber>");
         assertEquals(UserInterface.CMD_SELECT_ACCOUNT.getValue(), "selectAccount <accountNumber>");
@@ -18,7 +18,7 @@ public class UserInterfaceTest {
         assertEquals(CMD_WITHDRAW.getValue(), "withdraw <amount>");
         assertEquals(CMD_EJECT_CARD.getValue(), "ejectCard");
         assertEquals(UserInterface.INSTRUCTION.getValue(), "Supported commands are listed below or "
-            + CMD_EXIT.getValue() + " to quit." + System.lineSeparator()
+            + EXIT.getValue() + " to quit." + System.lineSeparator()
             + CMD_INSERT_CARD.getValue() + System.lineSeparator()
             + CMD_VERIFY_PIN.getValue() + System.lineSeparator()
             + CMD_SELECT_ACCOUNT.getValue() + System.lineSeparator()

@@ -1,17 +1,26 @@
 package com.circulardollar.cdatm.network;
 
+import static com.circulardollar.cdatm.utils.MockUtils.MOCK_NETWORK_DELAY;
+
 import com.circulardollar.cdatm.business.upstream.model.account.AccountRecord;
 import com.circulardollar.cdatm.business.upstream.model.account.IAccountRecord;
 import com.circulardollar.cdatm.business.upstream.model.accounts.AccountsRecord;
 import com.circulardollar.cdatm.business.upstream.model.accounts.IAccountsRecord;
-import com.circulardollar.cdatm.business.upstream.model.auth.*;
+import com.circulardollar.cdatm.business.upstream.model.auth.AuthRecord;
+import com.circulardollar.cdatm.business.upstream.model.auth.AuthRecordV2;
+import com.circulardollar.cdatm.business.upstream.model.auth.IAuthRecord;
+import com.circulardollar.cdatm.business.upstream.model.auth.IAuthRecordV2;
+import com.circulardollar.cdatm.business.upstream.model.auth.ILoginRecord;
+import com.circulardollar.cdatm.business.upstream.model.auth.ILogoutRecord;
+import com.circulardollar.cdatm.business.upstream.model.auth.ILogoutRecordRequest;
 import com.circulardollar.cdatm.business.upstream.model.deposit.DepositRecord;
 import com.circulardollar.cdatm.business.upstream.model.deposit.IDepositRecord;
 import com.circulardollar.cdatm.business.upstream.model.deposit.IDepositRecordRequest;
 import com.circulardollar.cdatm.business.upstream.model.withdraw.IWithdrawRecord;
 import com.circulardollar.cdatm.business.upstream.model.withdraw.IWithdrawRecordRequest;
 import com.circulardollar.cdatm.business.upstream.model.withdraw.WithdrawRecord;
-import com.circulardollar.cdatm.business.upstream.request.IRemoteRequest;
+import com.circulardollar.cdatm.business.upstream.model.token.IRequestWithToken;
+import com.circulardollar.cdatm.business.upstream.request.RemoteRequest;
 import com.circulardollar.cdatm.business.upstream.response.RemoteResponse;
 import com.circulardollar.cdatm.utils.MockError;
 import com.circulardollar.cdatm.utils.MockUtils;
@@ -22,10 +31,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.stream.IntStream;
-
-import static com.circulardollar.cdatm.utils.MockUtils.MOCK_NETWORK_DELAY;
 
 public class MockNetworkClientV2 implements INetworkClientV2 {
 
@@ -33,11 +39,12 @@ public class MockNetworkClientV2 implements INetworkClientV2 {
   private static final List<Integer> BALANCES = Arrays.asList(-100, 0, 100);
 
   @Override
-  public CompletableFuture<RemoteResponse<IAuthRecord>> verifyPin(IRemoteRequest<ILoginRecord> request) {
+  public CompletableFuture<RemoteResponse<IAuthRecord>> verifyPin(
+      RemoteRequest<ILoginRecord> request) {
     CompletableFuture<RemoteResponse<IAuthRecord>> completableFuture = new CompletableFuture<>();
     Executors.newCachedThreadPool()
         .submit(
-            new ICallable<IRemoteRequest<ILoginRecord>, RemoteResponse<IAuthRecord>>(request) {
+            new ICallable<RemoteRequest<ILoginRecord>, RemoteResponse<IAuthRecord>>(request) {
               @Override
               public RemoteResponse<IAuthRecord> call() throws Exception {
 
@@ -45,7 +52,7 @@ public class MockNetworkClientV2 implements INetworkClientV2 {
 
                 String tokenId = UUID.randomUUID().toString();
 
-                List<AccountRecord> accounts = new ArrayList<>();
+                List<IAccountRecord> accounts = new ArrayList<>();
 
                 IntStream.range(0, ACCOUNT_NUMBERS.size())
                     .forEach(
@@ -72,11 +79,12 @@ public class MockNetworkClientV2 implements INetworkClientV2 {
   }
 
   @Override
-  public CompletableFuture<RemoteResponse<IAuthRecordV2>> verifyPinV2(IRemoteRequest<ILoginRecord> request) {
+  public CompletableFuture<RemoteResponse<IAuthRecordV2>> verifyPinV2(
+      RemoteRequest<ILoginRecord> request) {
     CompletableFuture<RemoteResponse<IAuthRecordV2>> completableFuture = new CompletableFuture<>();
     Executors.newCachedThreadPool()
         .submit(
-            new ICallable<IRemoteRequest<ILoginRecord>, RemoteResponse<IAuthRecordV2>>(request) {
+            new ICallable<RemoteRequest<ILoginRecord>, RemoteResponse<IAuthRecordV2>>(request) {
               @Override
               public RemoteResponse<IAuthRecordV2> call() throws Exception {
 
@@ -110,18 +118,19 @@ public class MockNetworkClientV2 implements INetworkClientV2 {
   }
 
   @Override
-  public CompletableFuture<RemoteResponse<IAccountsRecord>> getAccounts(IRemoteRequest<String> request) {
+  public CompletableFuture<RemoteResponse<IAccountsRecord>> getAccounts(
+      RemoteRequest<IRequestWithToken> request) {
     CompletableFuture<RemoteResponse<IAccountsRecord>> completableFuture =
         new CompletableFuture<>();
     Executors.newCachedThreadPool()
         .submit(
-            new ICallable<IRemoteRequest<String>, RemoteResponse<IAccountsRecord>>(request) {
+            new ICallable<RemoteRequest<IRequestWithToken>, RemoteResponse<IAccountsRecord>>(request) {
               @Override
               public RemoteResponse<IAccountsRecord> call() throws Exception {
 
                 Thread.sleep(MOCK_NETWORK_DELAY);
 
-                List<AccountRecord> accounts = new ArrayList<>();
+                List<IAccountRecord> accounts = new ArrayList<>();
 
                 IntStream.range(0, ACCOUNT_NUMBERS.size())
                     .forEach(
@@ -148,12 +157,11 @@ public class MockNetworkClientV2 implements INetworkClientV2 {
 
   @Override
   public CompletableFuture<RemoteResponse<IDepositRecord>> deposit(
-      IRemoteRequest<IDepositRecordRequest> request) {
-    CompletableFuture<RemoteResponse<IDepositRecord>> completableFuture =
-        new CompletableFuture<>();
+      RemoteRequest<IDepositRecordRequest> request) {
+    CompletableFuture<RemoteResponse<IDepositRecord>> completableFuture = new CompletableFuture<>();
     Executors.newCachedThreadPool()
         .submit(
-            new ICallable<IRemoteRequest<IDepositRecordRequest>, RemoteResponse<IDepositRecord>>(
+            new ICallable<RemoteRequest<IDepositRecordRequest>, RemoteResponse<IDepositRecord>>(
                 request) {
               @Override
               public RemoteResponse<IDepositRecord> call() throws Exception {
@@ -194,12 +202,12 @@ public class MockNetworkClientV2 implements INetworkClientV2 {
 
   @Override
   public CompletableFuture<RemoteResponse<IWithdrawRecord>> withdraw(
-      IRemoteRequest<IWithdrawRecordRequest> request) {
+      RemoteRequest<IWithdrawRecordRequest> request) {
     CompletableFuture<RemoteResponse<IWithdrawRecord>> completableFuture =
         new CompletableFuture<>();
     Executors.newCachedThreadPool()
         .submit(
-            new ICallable<IRemoteRequest<IWithdrawRecordRequest>, RemoteResponse<IWithdrawRecord>>(
+            new ICallable<RemoteRequest<IWithdrawRecordRequest>, RemoteResponse<IWithdrawRecord>>(
                 request) {
               @Override
               public RemoteResponse<IWithdrawRecord> call() throws Exception {
@@ -238,7 +246,8 @@ public class MockNetworkClientV2 implements INetworkClientV2 {
   }
 
   @Override
-  public CompletableFuture<RemoteResponse<ILogoutRecord>> logout(IRemoteRequest<ILogoutRecordRequest> logout) {
+  public CompletableFuture<RemoteResponse<ILogoutRecord>> logout(
+      RemoteRequest<ILogoutRecordRequest> logout) {
     return null;
   }
 }

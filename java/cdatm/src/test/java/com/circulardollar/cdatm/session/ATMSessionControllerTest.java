@@ -80,7 +80,7 @@ public class ATMSessionControllerTest {
         assertNotNull(as.getAccounts());
     }
 
-    @Test public void getSelectedAccount() {
+    @Test public void getSelectedAccount_01() {
         ATMSessionController as = new ATMSessionController();
         String selectedAccountNo = randomString();
         HashMap<String, IAccount> accountsMap = new HashMap<>();
@@ -89,6 +89,37 @@ public class ATMSessionControllerTest {
         as.setAccounts(randomString(), accountsMap);
         as.setSelectedAccountNumber(selectedAccountNo);
         assertNotNull(as.getSelectedAccount());
+    }
+
+    @Test public void getSelectedAccount_02() {
+        ATMSessionController as = new ATMSessionController();
+        String selectedAccountNo = randomString();
+        as.setAccounts(randomString(), null);
+        as.setSelectedAccountNumber(selectedAccountNo);
+        assertNull(as.getSelectedAccount());
+    }
+
+    @Test public void getSelectedAccount_03() {
+        ATMSessionController as = new ATMSessionController();
+        String selectedAccountNo = randomString();
+        HashMap<String, IAccount> accountsMap = new HashMap<>();
+        accountsMap.put(selectedAccountNo,
+            Account.newBuilder().setAccountNumber(randomString()).setBalance(randomInt()).build());
+        as.setAccounts(randomString(), accountsMap);
+        as.setSelectedAccountNumber(null);
+        assertNull(as.getSelectedAccount());
+    }
+
+    @Test public void getSelectedAccount_04() {
+        ATMSessionController as = new ATMSessionController();
+        String selectedAccountNo = randomString();
+        String anotherAccountNo = randomString();
+        HashMap<String, IAccount> accountsMap = new HashMap<>();
+        accountsMap.put(selectedAccountNo,
+            Account.newBuilder().setAccountNumber(randomString()).setBalance(randomInt()).build());
+        as.setAccounts(randomString(), accountsMap);
+        as.setSelectedAccountNumber(anotherAccountNo);
+        assertNull(as.getSelectedAccount());
     }
 
     @Test public void clear() {
