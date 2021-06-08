@@ -21,7 +21,7 @@ import com.circulardollar.cdatm.business.upstream.model.account.IAccountRecord;
 import com.circulardollar.cdatm.business.upstream.model.accounts.IAccountsRecord;
 import com.circulardollar.cdatm.business.upstream.model.auth.ILoginRecord;
 import com.circulardollar.cdatm.business.upstream.model.pin.IPinRecord;
-import com.circulardollar.cdatm.network.NonCSNetworkClientV2;
+import com.circulardollar.cdatm.play.network.__NetworkClientV2;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -47,7 +47,7 @@ public class __InsertCard_VerifyPin_SelectAccount {
   public void test_selectAccount_only_shouldExpectError() {
     IATMController controller =
         __Main.createATMController(
-            NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+            __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     assertNotNull(
         controller
             .selectAccount(
@@ -60,7 +60,7 @@ public class __InsertCard_VerifyPin_SelectAccount {
   public void test_insertCard_verifyPin_selectAccount_shouldNotExpectError() {
     IATMController controller =
         __Main.createATMController(
-            NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+            __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
     IResponse<List<String>, IError> accountsPerCard = controller.verifyPin(login.getPin());
@@ -88,7 +88,7 @@ public class __InsertCard_VerifyPin_SelectAccount {
   public void test_insertCard_verifyPin_selectAccount_invalid_accountNumber_shouldExpectError_01() {
     IATMController controller =
         __Main.createATMController(
-            NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+            __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
     assertNull(controller.verifyPin(login.getPin()).getError());
@@ -101,7 +101,7 @@ public class __InsertCard_VerifyPin_SelectAccount {
   public void test_insertCard_verifyPin_selectAccount_invalid_accountNumber_shouldExpectError_02() {
     IATMController controller =
         __Main.createATMController(
-            NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+            __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
     assertNull(controller.verifyPin(login.getPin()).getError());
@@ -115,7 +115,7 @@ public class __InsertCard_VerifyPin_SelectAccount {
       test_insertCard_verifyPin_selectAccount_invalid_then_valid_accountNumber_shouldExpectError() {
     IATMController controller =
         __Main.createATMController(
-            NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+            __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
     List<String> accounts = controller.verifyPin(login.getPin()).getBody();
@@ -133,7 +133,7 @@ public class __InsertCard_VerifyPin_SelectAccount {
       test_insertCard_verifyPin_selectAccount_valid_then_invalid_accountNumber_shouldExpectError() {
     IATMController controller =
         __Main.createATMController(
-            NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+            __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
     List<String> accounts = controller.verifyPin(login.getPin()).getBody();
@@ -150,7 +150,7 @@ public class __InsertCard_VerifyPin_SelectAccount {
   public void test_insertCard_verifyPin_repeat_selectAccount_shouldNotExpectError() {
     IATMController controller =
         __Main.createATMController(
-            NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+            __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
     List<String> accounts = controller.verifyPin(login.getPin()).getBody();

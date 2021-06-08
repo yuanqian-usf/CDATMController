@@ -25,7 +25,7 @@ import com.circulardollar.cdatm.business.upstream.model.accounts.IAccountsRecord
 import com.circulardollar.cdatm.business.upstream.model.auth.ILoginRecord;
 import com.circulardollar.cdatm.business.upstream.model.pin.IPinRecord;
 import com.circulardollar.cdatm.config.IATMConfigurations;
-import com.circulardollar.cdatm.network.NonCSNetworkClientV2;
+import com.circulardollar.cdatm.play.network.__NetworkClientV2;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +50,7 @@ public class __InsertCard_VerifyPin_SelectAccount_Deposit {
   public void test_deposit_only_shouldExpectError() {
     IATMController controller =
         __Main.createATMController(
-            NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+            __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     assertNotNull(controller.deposit(1).getError());
   }
 
@@ -58,7 +58,7 @@ public class __InsertCard_VerifyPin_SelectAccount_Deposit {
   public void test_insertCard_deposit_shouldExpectError() {
     IATMController controller =
         __Main.createATMController(
-            NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+            __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
     assertNotNull(controller.deposit(1).getError());
@@ -68,7 +68,7 @@ public class __InsertCard_VerifyPin_SelectAccount_Deposit {
   public void test_insertCard_verifyPin_deposit_shouldExpectError() {
     IATMController controller =
         __Main.createATMController(
-            NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+            __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
     assertNotNull(controller.verifyPin(login.getPin()).getBody());
@@ -83,7 +83,7 @@ public class __InsertCard_VerifyPin_SelectAccount_Deposit {
     do {
       controller =
           __Main.createATMController(
-              NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+              __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
       cardNumberAccountNumberPair =
           randomCardNumberWithValidDepositBalance(cardNumberAccountNumberAccountRecordTable, false);
     } while (cardNumberAccountNumberPair == null);
@@ -127,7 +127,7 @@ public class __InsertCard_VerifyPin_SelectAccount_Deposit {
     do {
       controller =
           __Main.createATMController(
-              NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+              __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
       cardNumberAccountNumberPair =
           randomCardNumberWithValidDepositBalance(cardNumberAccountNumberAccountRecordTable, true);
     } while (cardNumberAccountNumberPair == null);
@@ -165,7 +165,7 @@ public class __InsertCard_VerifyPin_SelectAccount_Deposit {
     do {
       controller =
           __Main.createATMController(
-              NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+              __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
       cardNumberAccountNumberPair =
           randomCardNumberWithValidDepositBalance(cardNumberAccountNumberAccountRecordTable, true);
     } while (cardNumberAccountNumberPair == null);

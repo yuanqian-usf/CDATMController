@@ -12,7 +12,7 @@ import com.circulardollar.cdatm.business.upstream.model.account.IAccountRecord;
 import com.circulardollar.cdatm.business.upstream.model.accounts.IAccountsRecord;
 import com.circulardollar.cdatm.business.upstream.model.auth.ILoginRecord;
 import com.circulardollar.cdatm.business.upstream.model.pin.IPinRecord;
-import com.circulardollar.cdatm.network.NonCSNetworkClientV2;
+import com.circulardollar.cdatm.play.network.__NetworkClientV2;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Before;
@@ -35,7 +35,7 @@ public class __InsertCard_VerifyPin_EjectCard {
   public void test_insertCard_verifyPin_ejectCard_shouldNotExpectError() {
     IATMController controller =
         __Main.createATMController(
-            NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+            __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
     assertNull(controller.verifyPin(login.getPin()).getError());
@@ -46,7 +46,7 @@ public class __InsertCard_VerifyPin_EjectCard {
   public void test_insertCard_verifyPin_ejectCard_repeat_shouldNotExpectError_01() {
     IATMController controller =
         __Main.createATMController(
-            NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+            __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     for (int i = 0; i < REPEAT_TEST_ITERATION; i++) {
       ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
       assertNull(controller.insertCard(login.getCard()).getError());
@@ -60,7 +60,7 @@ public class __InsertCard_VerifyPin_EjectCard {
     for (int i = 0; i < REPEAT_TEST_ITERATION; i++) {
       IATMController controller =
           __Main.createATMController(
-              NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+              __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
       ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
       assertNull(controller.insertCard(login.getCard()).getError());
       assertNull(controller.verifyPin(login.getPin()).getError());

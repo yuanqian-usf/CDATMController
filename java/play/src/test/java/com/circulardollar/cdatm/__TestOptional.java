@@ -31,7 +31,7 @@ public class __TestOptional {
 //        //flatMap
 //        //public<U> Optional<U> flatMap(Function<? super T, Optional<U>> mapper) {
 //        //map
-//        //public<U> Optional<U>     map(Function<? super T, ? extends U> mapper) {
+//        //public<U> Optional<U>     map(Function<? super T, U> mapper) {
 //        Optional<Car> car = getNextCarIfPresent();
 //        Optional<Integer> driversAge =
 //            car.map(Car::getDriver).flatMap(Person::getAge);
