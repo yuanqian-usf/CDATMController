@@ -17,16 +17,9 @@ public enum ATMStates {
     this.weight = weight;
   }
 
-  public Integer getId() {
-    return id;
-  }
-
-  public Integer getWeight() {
-    return weight;
-  }
-
   /**
    * Not Null
+   *
    * @param id id
    * @return if no matches {@link #UNSPECIFIED} would be returned
    */
@@ -37,5 +30,13 @@ public enum ATMStates {
       }
     }
     return UNSPECIFIED;
+  }
+
+  public Integer getId() {
+    return id;
+  }
+
+  public Integer getWeight() {
+    return weight;
   }
 }

@@ -8,11 +8,4 @@ public interface IDepositRecord {
   IAccountRecord getAccount();
 
   Long getTimeStamp();
-
-  interface IBuilder<T extends IAccountRecord> {
-    IBuilder setAmount(Integer amount);
-    IBuilder setAccount(T accountRecord);
-    IBuilder setTimeStamp(Long timeStamp);
-    IDepositRecord build();
-  }
 }

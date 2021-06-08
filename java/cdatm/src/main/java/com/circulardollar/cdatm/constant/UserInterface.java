@@ -2,7 +2,7 @@ package com.circulardollar.cdatm.constant;
 
 public enum UserInterface {
   WELCOME("Welcome to Circular Dollar ATM controller!"),
-  CMD_EXIT("q"),
+  EXIT("q"),
   CMD_INSERT_CARD("insertCard <cardNumber>"),
   CMD_VERIFY_PIN("verifyPin <pinNumber>"),
   CMD_SELECT_ACCOUNT("selectAccount <accountNumber>"),
@@ -11,7 +11,7 @@ public enum UserInterface {
   CMD_WITHDRAW("withdraw <amount>"),
   CMD_EJECT_CARD("ejectCard"),
   INSTRUCTION("Supported commands are listed below or "
-      + CMD_EXIT.getValue() + " to quit." + System.lineSeparator()
+      + EXIT.getValue() + " to quit." + System.lineSeparator()
       + CMD_INSERT_CARD.getValue() + System.lineSeparator()
       + CMD_VERIFY_PIN.getValue() + System.lineSeparator()
       + CMD_SELECT_ACCOUNT.getValue() + System.lineSeparator()
