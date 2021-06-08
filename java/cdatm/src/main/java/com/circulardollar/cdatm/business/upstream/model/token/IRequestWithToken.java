@@ -1,4 +1,4 @@
-package com.circulardollar.cdatm.business.upstream.request;
+package com.circulardollar.cdatm.business.upstream.model.token;
 
 @FunctionalInterface
 public interface IRequestWithToken {

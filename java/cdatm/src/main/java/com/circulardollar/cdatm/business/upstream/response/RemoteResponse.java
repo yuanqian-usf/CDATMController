@@ -3,7 +3,7 @@ package com.circulardollar.cdatm.business.upstream.response;
 import com.circulardollar.cdatm.business.upstream.model.error.IError;
 import com.circulardollar.cdatm.constant.Errors;
 
-public class RemoteResponse<T> implements IResponse<T, IError> {
+public class RemoteResponse<T> implements IRemoteResponse<T, IError> {
   private final T body;
   private final IError error;
 
@@ -49,6 +49,10 @@ public class RemoteResponse<T> implements IResponse<T, IError> {
       this.body = body;
       this.error = null;
       return this;
+    }
+
+    public T getBody() {
+      return body;
     }
 
     public RemoteResponse<T> build() {

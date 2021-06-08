@@ -7,7 +7,7 @@ public interface IAuthRecord {
 
   String getTokenId();
 
-  List<? extends IAccountRecord> getAccounts();
+  List<IAccountRecord> getAccounts();
 
   Long getTimeStamp();
 }
