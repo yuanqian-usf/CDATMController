@@ -143,7 +143,7 @@ public class __TestBase {
       // Guarantee at least 1 is available
       int accountAmountForThisCard = randomNumber(logOfTotalAccountsPerAccount) + 1;
 
-      List<AccountRecord> accountRecordList = new ArrayList<>();
+      List<IAccountRecord> accountRecordList = new ArrayList<>();
 
       for (int j = 0; j < accountAmountForThisCard; j++) {
         accountRecordList.add(

@@ -38,14 +38,14 @@ public class __InsertCard {
   @Test
   public void test_insertCard_response_not_null() {
     assertNotNull(
-        __Main.nonCSATMController()
+        __Main.__ATMController()
             .insertCard(pendingCardNumberCardBuilder.setCardNumber(anyString()).build()));
   }
 
   @Test
   public void test_insertCard_response_shouldExpectError() {
     assertNotNull(
-        __Main.nonCSATMController()
+        __Main.__ATMController()
             .insertCard(pendingCardNumberCardBuilder.setCardNumber(anyString()).build())
             .getError());
   }
@@ -53,7 +53,7 @@ public class __InsertCard {
   @Test
   public void test_insertCard_validate_cardNumber_zeroLength_shouldExpectError() {
     assertNotNull(
-        __Main.nonCSATMController()
+        __Main.__ATMController()
             .insertCard(pendingCardNumberCardBuilder.setCardNumber(emptyString()).build())
             .getError());
   }
@@ -62,7 +62,7 @@ public class __InsertCard {
   public void test_insertCard_validate_cardNumber_invalidLength_shouldExpectError_BELOW_MIN() {
     for (int i = 0; i < RANDOM_TEST_ITERATION; i++) {
       IError error =
-          __Main.nonCSATMController()
+          __Main.__ATMController()
               .insertCard(
                   pendingCardNumberCardBuilder
                       .setCardNumber(
@@ -79,7 +79,7 @@ public class __InsertCard {
   public void test_insertCard_validate_cardNumber_invalidLength_shouldExpectError_ABOVE_MAX() {
     for (int i = 0; i < RANDOM_TEST_ITERATION; i++) {
       IError error =
-          __Main.nonCSATMController()
+          __Main.__ATMController()
               .insertCard(
                   pendingCardNumberCardBuilder
                       .setCardNumber(
@@ -94,7 +94,7 @@ public class __InsertCard {
   public void test_insertCard_validate_cardNumber_validFixedLength_shouldExpectBody() {
     for (int i = 0; i < RANDOM_TEST_ITERATION; i++) {
       assertNotNull(
-          __Main.nonCSATMController()
+          __Main.__ATMController()
               .insertCard(
                   pendingCardNumberCardBuilder
                       .setCardNumber(
@@ -108,7 +108,7 @@ public class __InsertCard {
   public void test_insertCard_validate_cardNumber_validFixedLength_shouldNotExpectError() {
     for (int i = 0; i < RANDOM_TEST_ITERATION; i++) {
       assertNull(
-          __Main.nonCSATMController()
+          __Main.__ATMController()
               .insertCard(
                   pendingCardNumberCardBuilder
                       .setCardNumber(
@@ -122,7 +122,7 @@ public class __InsertCard {
   public void test_insertCard_cardNumber_validRandomLength_insertCard_shouldNotExpectError() {
     for (int i = 0; i < RANDOM_TEST_ITERATION; i++) {
       assertNull(
-          __Main.nonCSATMController()
+          __Main.__ATMController()
               .insertCard(
                   pendingCardNumberCardBuilder
                       .setCardNumber(
@@ -138,7 +138,7 @@ public class __InsertCard {
   public void test_insertCard_cardNumber_validRandomLength_insertCard_shouldExpectTrue() {
     for (int i = 0; i < RANDOM_TEST_ITERATION; i++) {
       Boolean actual =
-          __Main.nonCSATMController()
+          __Main.__ATMController()
               .insertCard(
                   pendingCardNumberCardBuilder
                       .setCardNumber(
@@ -153,7 +153,7 @@ public class __InsertCard {
 
   @Test
   public void test_insertCard_repeat_shouldExpectError() {
-    IATMController controller = __Main.nonCSATMController();
+    IATMController controller = __Main.__ATMController();
     assertNull(controller.insertCard(validRandomCard()).getError());
     assertNotNull(controller.insertCard(validRandomCard()).getError());
   }
@@ -162,7 +162,7 @@ public class __InsertCard {
   public void test_insertCard_repeat_async_shouldExpectError()
       throws ExecutionException, InterruptedException {
     for (int i = 0; i < REPEAT_TEST_ITERATION; i++) {
-      IATMController controller = __Main.nonCSATMController();
+      IATMController controller = __Main.__ATMController();
       CompletableFuture<IResponse<Boolean, IError>> opAsync1 =
           CompletableFuture.supplyAsync(() -> controller.insertCard(validRandomCard()));
       CompletableFuture<IResponse<Boolean, IError>> opAsync2 =

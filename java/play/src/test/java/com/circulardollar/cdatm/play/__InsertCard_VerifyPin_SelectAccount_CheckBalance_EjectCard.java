@@ -16,7 +16,7 @@ import com.circulardollar.cdatm.business.upstream.model.account.IAccountRecord;
 import com.circulardollar.cdatm.business.upstream.model.accounts.IAccountsRecord;
 import com.circulardollar.cdatm.business.upstream.model.auth.ILoginRecord;
 import com.circulardollar.cdatm.business.upstream.model.pin.IPinRecord;
-import com.circulardollar.cdatm.network.NonCSNetworkClientV2;
+import com.circulardollar.cdatm.play.network.__NetworkClientV2;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +40,7 @@ public class __InsertCard_VerifyPin_SelectAccount_CheckBalance_EjectCard {
       test_insertCard_verifyPin_selectAccount_checkBalance_ejectCard_shouldNotExpectError() {
     IATMController controller =
         __Main.createATMController(
-            NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+            __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
     List<String> accounts = controller.verifyPin(login.getPin()).getBody();
@@ -59,7 +59,7 @@ public class __InsertCard_VerifyPin_SelectAccount_CheckBalance_EjectCard {
       test_insertCard_verifyPin_selectAccount_checkBalance_repeat_ejectCard_shouldExpectError() {
     IATMController controller =
         __Main.createATMController(
-            NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+            __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
     assertNull(controller.insertCard(login.getCard()).getError());
     List<String> accounts = controller.verifyPin(login.getPin()).getBody();
@@ -78,7 +78,7 @@ public class __InsertCard_VerifyPin_SelectAccount_CheckBalance_EjectCard {
   public void test_insertCard_verifyPin_selectAccount_ejectCard_repeat_shouldNotExpectError() {
     IATMController controller =
         __Main.createATMController(
-            NonCSNetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
+            __NetworkClientV2.newBuilder().setAccountsRecordTable(accountsRecordTable));
     for (int i = 0; i < REPEAT_TEST_ITERATION; i++) {
       ILogin login = getRandomExistingLogin(accountsRecordTable.keySet());
       assertNull(controller.insertCard(login.getCard()).getError());
