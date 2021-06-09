@@ -58,3 +58,13 @@ tasks.register('applicationCodeCoverageReport', JacocoReport) {
     executionData run
     sourceSets sourceSets.main
 }
+
+// run with Terminal:
+// $ ./gradlew :cdatm:runLocal -q --console=plain --args='-url localhost'
+task runLocal(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = mainClassName
+    args '-url', 'localhost'
+    standardInput = System.in
+}
