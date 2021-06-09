@@ -5,6 +5,7 @@ plugins {
 }
 
 sourceCompatibility = '1.8'
+mainClassName = 'com.circulardollar.cdatm.__Main'
 version = '1.0.0'
 
 repositories {
@@ -20,6 +21,11 @@ dependencies {
 }
 
 sourceSets {
+    main {
+        java {
+            srcDirs 'src/test/java'
+        }
+    }
     test {
         java {
             srcDir 'src/test/java'
@@ -30,4 +36,13 @@ sourceSets {
 
 tasks.withType(JavaCompile) {
     options.fork = true
+}
+
+// run with Terminal
+// $ ./gradlew :play:runMockDB -q --console=plain
+task runMockDB(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = mainClassName
+    standardInput = System.in
 }
