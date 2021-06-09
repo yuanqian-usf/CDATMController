@@ -38,7 +38,8 @@ public final class UserInputUtils {
       String userInput = scanner.nextLine();
       if (UserInterface.EXIT.getValue().equals(userInput)) break;
       String[] inputArr = userInput.split(REGEX_SPACES);
-      DownstreamAPIs api = DownstreamAPIs.ofCommand(inputArr[0]);
+      DownstreamAPIs api = DownstreamAPIs.ofShortcut(inputArr[0]);
+      if (DownstreamAPIs.UNSPECIFIED == api) api = DownstreamAPIs.ofCommand(inputArr[0]);
       if (inputArr.length < api.getArgSize()) {
         System.out.println(UserInterface.INVALID_ARGUMENT_SIZE.getValue());
       } else {

@@ -4,6 +4,7 @@ import static com.circulardollar.cdatm.TestBase.randomBoolean;
 import static com.circulardollar.cdatm.TestBase.randomInt;
 import static com.circulardollar.cdatm.TestBase.randomList;
 import static com.circulardollar.cdatm.TestBase.randomSet;
+import static com.circulardollar.cdatm.TestBase.randomString;
 import static com.circulardollar.cdatm.constant.ATMStates.INSERT_CARD;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
@@ -379,6 +380,42 @@ public class UserInputUtilsTest {
     verify(controller, never()).selectAccount(any());
     verify(controller, times(1)).checkBalance();
     verify(controller, never()).deposit(any());
+    verify(controller, never()).withdraw(any());
+    verify(controller, never()).ejectCard();
+  }
+
+
+  @Test
+  public void handleUserInput_deposit_shortcut() {
+    IATMController controller = mock(IATMController.class);
+    when(controller.deposit(any()))
+        .thenReturn(Response.<IDeposit>newBuilder().setBody(new IDeposit() {
+          @Override
+          public IAccount getAccount() {
+            return null;
+          }
+
+          @Override
+          public Integer getAmount() {
+            return null;
+          }
+
+          @Override
+          public Long getTimeStamp() {
+            return null;
+          }
+        }).build());
+    String value = "1234";
+    String input = String.join(" ", Arrays.asList(DownstreamAPIs.DEPOSIT.getShortcut(), value));
+    InputStream in = new ByteArrayInputStream(input.getBytes());
+    System.setIn(in);
+    Scanner scanner = new Scanner(in);
+    UserInputUtils.handleUserInput(controller, scanner);
+    verify(controller, never()).insertCard(any());
+    verify(controller, never()).verifyPin(any());
+    verify(controller, never()).selectAccount(any());
+    verify(controller, never()).checkBalance();
+    verify(controller, times(1)).deposit(any());
     verify(controller, never()).withdraw(any());
     verify(controller, never()).ejectCard();
   }
