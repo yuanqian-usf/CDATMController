@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'java-library-distribution'
+}
+
+sourceCompatibility = '1.8'
+mainClassName = 'com.circulardollar.cdatm.__Main'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+ext {
+    mockitoVersion = '3.9.0'
+}
+
+dependencies {
+    api project(':cdatm')
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: "${mockitoVersion}"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/test/java'
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
+            srcDir project(':cdatm').sourceSets.test.java
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.fork = true
+}
+
+// run with Terminal
+// $ ./gradlew :play:runMockDB -q --console=plain
+task runMockDB(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = mainClassName
+    standardInput = System.in
+}
