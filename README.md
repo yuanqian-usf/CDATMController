@@ -74,11 +74,13 @@ Use CURL command to get a list of random customer credentials info which is unch
 **Launch the CircularDollar ATM Controller**
 ** Note:** use a third Terminal window for below commands
 
+_Go back to project_
+
 ```$ cd {repo_root_path}/java```
 
-```$ ./gradlew build```
+_build the project if haven't done so_
 
-  _If one haven't done above 2 commands yet_
+```$ ./gradlew build```
 
 ```$ ./gradlew :cdatm:runLocal -q --console=plain --args='-url localhost'```
 
